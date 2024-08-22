@@ -44,7 +44,7 @@ const Navbar = ({ username }: UsernameProps) => {
             <Link href="/profile">Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <a onClick={() => signOut()}>Logout</a>
+            <a onClick={() => signOut({ callbackUrl: "/" })}>Logout</a>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -1,40 +1,5 @@
-import { dbConnect } from "@/lib/dbConnect";
-import NextAuth from "next-auth/next";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
-import User from "@/models/User";
+import { authOptions } from "@/lib/authOptions";
+import NextAuth from "next-auth";
 
-export const authOptions: any = {
-  providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {},
-      async authorize(credentials: any) {
-        try {
-          await dbConnect();
-          const user = await User.findOne({ email: credentials.email });
-          if (!user) return null;
-          const passwordMatch = await bcrypt.compare(
-            credentials?.password,
-            user.password
-          );
-          if (!passwordMatch) return null;
-
-          return user;
-        } catch (error) {
-          console.log("Error: ", error);
-        }
-      },
-    }),
-  ],
-  session: {
-    strategy: "jwt",
-    maxAge: 10000,
-  },
-  secret: process.env.NEXTAUTH_SECRET,
-  pages: {
-    signIn: "/",
-  },
-};
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

@@ -61,7 +61,12 @@ const Analytics = ({ data }: any) => {
           <div className="w-full h-[300px]">
             <ResponsiveContainer>
               <LineChart width={1100} height={300} data={newData}>
-                <Line type="monotone" dataKey="not" stroke="#8884d8" />
+                <Line
+                  type="monotone"
+                  dataKey="not"
+                  stroke="#8884d8"
+                  strokeWidth={4}
+                />
                 <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
                 <XAxis
                   dataKey="lesson_date"

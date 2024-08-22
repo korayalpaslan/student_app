@@ -5,7 +5,7 @@ import PerformenceDetailTable from "@/components/performance/PerformanceDetailTa
 
 const getReview = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/reviews/${id}`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reviews/${id}`, {
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");

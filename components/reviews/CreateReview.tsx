@@ -75,7 +75,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
 
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/reviews", {
+      const res = await fetch(`${process.env.API_URL}/api/reviews`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

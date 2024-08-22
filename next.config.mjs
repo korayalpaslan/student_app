@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  env: {
+    API_URL: "https://studentapp.netlify.app",
+    // API_URL: "http://localhost:3000",
+  },
+};
 
 export default nextConfig;

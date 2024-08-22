@@ -6,7 +6,7 @@ import Loading from "./loading";
 
 const getStudents = async () => {
   try {
-    const res = await fetch(`http://localhost:3000/api/students`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/students`, {
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");

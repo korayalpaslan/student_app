@@ -43,7 +43,7 @@ const CreateTeacher = () => {
   const submitHandler = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/teachers", {
+      const res = await fetch(`${process.env.API_URL}/api/teachers`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

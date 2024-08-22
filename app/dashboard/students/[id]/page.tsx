@@ -6,7 +6,7 @@ import Analytics from "@/components/performance/Analytics";
 
 const getStudent = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/students/${id}`, {
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");
@@ -18,7 +18,7 @@ const getStudent = async (id: string) => {
 const getReviews = async (query: string) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/reviews?query=${query}`,
+      `${process.env.NEXTAUTH_URL}/api/reviews?query=${query}`,
       {
         cache: "no-store",
       }

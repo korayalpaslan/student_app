@@ -1,32 +1,10 @@
-import { Suspense } from "react";
-import BackButton from "@/components/BackButton";
-import PostsPagination from "@/components/students_list/PostsPagination";
-import PostsTable from "@/components/students_list/PostsTable";
-import Loading from "./loading";
+import StudentsPage from "@/containers/StudentsPage";
 
-const getStudents = async () => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/students`, {
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
-};
-
-const PostsPage = async () => {
-  const students = await getStudents();
-
+const PostsPage = () => {
   return (
-    <div>
-      <BackButton text="Ana Sayfa" link="/dashboard" />
-      <Suspense fallback={<Loading />}>
-        <PostsTable data={students.data} />
-      </Suspense>
-      {/* <PostsPagination /> */}
-    </div>
+    <>
+      <StudentsPage />
+    </>
   );
 };
 

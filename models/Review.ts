@@ -1,28 +1,20 @@
 const mongoose = require("mongoose");
-import Teacher from "@/models/Teacher";
+import User from "@/models/User";
 import Student from "@/models/Student";
 
 const ReviewSchema: any = new mongoose.Schema({
   student: [{ type: mongoose.Schema.Types.ObjectId, ref: Student }],
-  criteria_one: {
-    type: Number,
+  criterias: {
+    type: Array,
     required: [true, "Please rate the criteria"],
   },
-  criteria_two: {
-    type: Number,
-    required: [true, "Please rate the criteria"],
-  },
-  criteria_three: {
-    type: Number,
-    required: [true, "Please rate the criteria"],
-  },
-  criteria_four: {
-    type: Number,
-    required: [true, "Please rate the criteria"],
-  },
-  teacher: [{ type: mongoose.Schema.Types.ObjectId, ref: Teacher }],
+  teacher: [{ type: mongoose.Schema.Types.ObjectId, ref: User }],
   lesson_date: {
     type: Date,
+    required: true,
+  },
+  isAttended: {
+    type: Boolean,
     required: true,
   },
 });

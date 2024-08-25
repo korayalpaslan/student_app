@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
+import { Target } from "lucide-react";
 interface UsernameProps {
   username: string;
 }
@@ -26,8 +26,8 @@ const Navbar = ({ username }: UsernameProps) => {
 
   return (
     <div className="bg-primary dark:bg-slate-700 text-white py-2 px-5 flex justify-between items-center h-[10vh] fixed z-50 top-0 w-full">
-      <Link href="/test">
-        <Image src={logo} alt="TCI Logo" width={40} priority />
+      <Link href="/dashboard" className="font-bold text-4xl flex items-center">
+        <Target size={32} /> <span className="ml-2 mb-2">score app</span>
       </Link>
 
       <DropdownMenu>

@@ -30,6 +30,24 @@ export const authOptions: any = {
     strategy: "jwt",
     maxAge: 10000,
   },
+  callbacks: {
+    jwt({ token, user }: any) {
+      if (user) {
+        return { ...token, role: user.role };
+      }
+      return token;
+    },
+    session: ({ session, token, user }: any) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          role: token.role,
+        },
+        expires: Date,
+      };
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/",

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import { withUt } from "uploadthing/tw";
+const { nextui } = require("@nextui-org/react");
 
 module.exports = withUt({
   darkMode: ["class"],
@@ -8,6 +9,7 @@ module.exports = withUt({
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     container: {
@@ -54,7 +56,8 @@ module.exports = withUt({
         },
       },
       fontFamily: {
-        roboto: ["var(--font-roboto)"],
+        // roboto: ["var(--font-roboto)"],
+        sans: ["var(--font-custom)"],
       },
       backgroundImage: {
         "dotted-pattern": "url('/assets/images/dotted-pattern.png')",
@@ -81,5 +84,5 @@ module.exports = withUt({
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), nextui()],
 });

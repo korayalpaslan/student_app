@@ -25,6 +25,7 @@ import logo from "@/public/images/tci-logo.png";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Target } from "lucide-react";
 
 const loginSchema = z.object({
   email: z.string().email({
@@ -68,19 +69,26 @@ const LoginForm = () => {
   };
   return (
     <div className="flex">
-      <div className="hidden lg:block h-screen lg:w-1/2 bg-gray-950"></div>
-      <div className="w-full lg:w-1/2 h-screen flex-center">
-        <Card className="mx-auto lg:w-[450px] max-w-lg">
-          <Image
+      <div className="hidden lg:block bg-[url('/images/bg.jpg')] bg-cover h-screen lg:w-1/2 bg-gray-950">
+        <div className="h-full w-full bg-black/30 text-white text-6xl px-6 py-12 flex items-end">
+          Track your student performance efficiently
+        </div>
+      </div>
+      <div className="w-full lg:w-1/2 h-screen flex flex-col">
+        <div className="font-bold text-4xl p-12 mx-auto flex items-center">
+          <Target size={32} /> <span className="ml-2 mb-2">score app</span>
+        </div>
+        <Card className="mx-auto lg:w-[450px] max-w-lg my-auto">
+          {/* <Image
             src={logo}
             width={120}
             alt="TCI Logo"
             className="mx-auto mt-8"
-          />
+          /> */}
           <CardHeader>
-            <CardTitle className="text-xl">Giriş</CardTitle>
+            <CardTitle className="text-xl">Welcome Back 👋</CardTitle>
             <CardDescription>
-              TCI Öğrenci Değerlendirme Uygulaması
+              Student Tracking App for The Canadian Institute Turkiye
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -95,9 +103,12 @@ const LoginForm = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>E-posta</FormLabel>
+                        <FormLabel>E-mail</FormLabel>
                         <FormControl>
-                          <Input placeholder="E-postanızı giriniz" {...field} />
+                          <Input
+                            placeholder="Please insert your e-mail"
+                            {...field}
+                          />
                         </FormControl>
 
                         <FormMessage />
@@ -111,11 +122,11 @@ const LoginForm = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Şifre</FormLabel>
+                        <FormLabel>Password</FormLabel>
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="Şifrenizi giriniz"
+                            placeholder="Please insert your password"
                             {...field}
                           />
                         </FormControl>
@@ -126,14 +137,14 @@ const LoginForm = () => {
                   />
                 </div>
                 <Button type="submit" className="w-full">
-                  {isLoading ? <p>Giriş Yapılıyor...</p> : <p>Oturum Aç</p>}
+                  {isLoading ? <p>Please Wait</p> : <p>Log in</p>}
                 </Button>
               </form>
             </Form>
             <div className="mt-4 text-center text-sm">
-              Henüz bir hesabınız yok mu?{" "}
-              <Link href="/register" className="underline">
-                Üye Ol
+              Don't you have an account?{" "}
+              <Link href="/register" className="underline font-semibold">
+                Sign up
               </Link>
             </div>
             {/*

@@ -17,21 +17,27 @@ import {
 } from "@/components/ui/card";
 
 const Analytics = ({ data }: any) => {
-  const newArray = data.map((item: any) => {
-    const itemArray = new Array(
-      +item.criteria_one.toFixed(2),
-      +item.criteria_two.toFixed(2),
-      +item.criteria_three.toFixed(2),
-      +item.criteria_four.toFixed(2)
-    );
+  // const newArray = data.map((item: any) => {
+  //   const itemArray = new Array(
+  //     +item.criteria_one.toFixed(2),
+  //     +item.criteria_two.toFixed(2),
+  //     +item.criteria_three.toFixed(2),
+  //     +item.criteria_four.toFixed(2)
+  //   );
 
-    return itemArray;
-  });
+  //   return itemArray;
+  // });
 
-  const updatedArray = newArray.map((item: any) => {
-    const array = item.reduce((a: any, b: any) => a + b) / item.length;
+  // const updatedArray = newArray.map((item: any) => {
+  //   const array = item.reduce((a: any, b: any) => a + b) / item.length;
+  //   return array;
+  // });
+
+  const arraySum = (arr: any) => {
+    const array =
+      arr.reduce((a: any, b: any, index: any) => a + b, 0) / arr.length;
     return array;
-  });
+  };
 
   const newData = data
     .map((item: any, i: any) => {
@@ -41,7 +47,7 @@ const Analytics = ({ data }: any) => {
           month: "long",
           day: "numeric",
         }),
-        not: updatedArray[i],
+        not: arraySum(item.criterias),
       };
 
       return update;

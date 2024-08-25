@@ -35,7 +35,7 @@ const ReviewDetail = async ({ params }: any) => {
           {date} / Değerlendirme Detayı
         </h4>
         <p className="text-sm text-muted-foreground lg:w-1/2 mt-4">
-          Değerlendiren Öğretmen: {review.data.teacher[0].fullname}
+          Değerlendiren Öğretmen: {review.data.teacher[0].name}
         </p>
         <PerformenceDetailTable data={review} />
       </div>

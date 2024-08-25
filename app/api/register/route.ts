@@ -5,7 +5,8 @@ import { hashSync } from "bcryptjs";
 
 export async function POST(request: Request) {
   await dbConnect();
-  const { name, email, password, role } = await request.json();
+  const { name, branch, email, password, isVerified, role } =
+    await request.json();
   const hashedPassword = await hashSync(password, 8);
 
   try {
@@ -19,8 +20,10 @@ export async function POST(request: Request) {
     }
     await User.create({
       name,
+      branch,
       role,
       email,
+      isVerified,
       password: hashedPassword,
     });
     return NextResponse.json({ messsage: "User registered" }, { status: 201 });

@@ -7,21 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Link from "next/link";
 import { Search } from "lucide-react";
+import Link from "next/link";
 
-interface PostTableProps {
-  limit?: number;
-  title?: string;
-  data: any;
-}
-
-const PostsTable = ({ data }: PostTableProps) => {
+const StudentTable = ({ data }: any) => {
   return (
     <div className="mt-10">
       <div className="pb-4 mb-8">
         <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-          Öğrenci Performans Tablosu
+          Student List
         </h4>
         <p className="text-sm text-muted-foreground lg:w-1/2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit
@@ -36,10 +30,10 @@ const PostsTable = ({ data }: PostTableProps) => {
           <TableRow>
             <TableHead>Student Name</TableHead>
             <TableHead className="text-center">Class</TableHead>
+            <TableHead className="text-center">Level</TableHead>
             <TableHead className="hidden md:table-cell text-center">
-              Level
+              Details
             </TableHead>
-            <TableHead className="text-center">Status</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -52,12 +46,12 @@ const PostsTable = ({ data }: PostTableProps) => {
                 <TableCell className="font-medium text-center">
                   {student.class}
                 </TableCell>
-                <TableCell className=" hidden md:table-cell text-center">
+                <TableCell className="font-medium text-center">
                   {student.level}
                 </TableCell>
-                <TableCell className="font-medium flex justify-center">
+                <TableCell className=" hidden md:flex justify-center">
                   <Link href={`/dashboard/students/${student._id}`}>
-                    <Search size={16} />
+                    <Search size={20} />
                   </Link>
                 </TableCell>
               </TableRow>
@@ -69,4 +63,4 @@ const PostsTable = ({ data }: PostTableProps) => {
   );
 };
 
-export default PostsTable;
+export default StudentTable;

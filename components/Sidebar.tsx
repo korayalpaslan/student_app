@@ -1,3 +1,5 @@
+"use client";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   Command,
@@ -12,7 +14,7 @@ import {
 } from "@/components/ui/command";
 import {
   LayoutDashboard,
-  Newspaper,
+  Gauge,
   Folders,
   CreditCard,
   Settings,
@@ -22,40 +24,70 @@ import {
 } from "lucide-react";
 
 const Sidebar = () => {
+  const pathname = usePathname();
   return (
-    <Command className="bg-gray-50 rounded-none min-h-[90vh] fixed top-[10vh] w-[300px]">
-      <CommandInput placeholder="Aradığınız menü adını yazın" />
-      <CommandList>
+    <Command className="rounded-none min-h-[90vh] fixed top-[10vh] w-[300px] border-r-1">
+      <CommandInput placeholder="Search menu tab" />
+      <CommandList className="min-h-[90vh]">
         <CommandEmpty>Sonuç bulunamadı.</CommandEmpty>
-        <CommandGroup heading="Sık Kullanılanlar">
+        <CommandGroup heading="Essentials">
           <CommandItem>
-            <LayoutDashboard className="mr-2 h-4 w-4" />
-            <Link href="/dashboard">Genel Bakış</Link>
+            <div
+              className={`flex items-center w-full h-full px-2 py-2.5 rounded-md ${
+                pathname === "/dashboard" && "bg-primary text-secondary-50"
+              } `}
+            >
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              <Link href="/dashboard">Overview</Link>
+            </div>
           </CommandItem>
           <CommandItem>
-            <Newspaper className="mr-2 h-4 w-4" />
-            <Link href="/dashboard/students">Performans Tablosu</Link>
+            <div
+              className={`flex items-center w-full h-full px-2 py-2.5 rounded-md ${
+                pathname === "/dashboard/students" &&
+                "bg-primary text-secondary-50"
+              } `}
+            >
+              <Gauge className="mr-2 h-4 w-4" />
+              <Link href="/dashboard/students">Student List</Link>
+            </div>
           </CommandItem>
           <CommandItem>
-            <Star className="mr-2 h-4 w-4" />
-            <Link href="/dashboard/create_review">Değerlendirme Oluştur</Link>
+            <div
+              className={`flex items-center w-full h-full px-2 py-2.5 rounded-md ${
+                pathname === "/dashboard/create_review" &&
+                "bg-primary text-secondary-50"
+              } `}
+            >
+              <Star className="mr-2 h-4 w-4" />
+              <Link href="/dashboard/create_review">Create Review</Link>
+            </div>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Kayıt İşlemleri">
+        <CommandGroup heading="Settings">
           <CommandItem>
-            <User className="mr-2 h-4 w-4" />
-            <Link href="/dashboard/create_teacher">Yeni Öğretmen Kaydı</Link>
+            <div
+              className={`flex items-center w-full h-full px-2 py-2.5 rounded-md ${
+                pathname === "/dashboard/teachers" &&
+                "bg-primary text-secondary-50"
+              } `}
+            >
+              <User className="mr-2 h-4 w-4" />
+              <Link href="/dashboard/teachers">Teacher List</Link>
+            </div>
           </CommandItem>
           <CommandItem>
-            <GraduationCap className="mr-2 h-4 w-4" />
-            <Link href="/dashboard/create_student">Yeni Öğrenci Kaydı</Link>
+            <div
+              className={`flex items-center w-full h-full px-2 py-2.5 rounded-md ${
+                pathname === "/dashboard/create_student" &&
+                "bg-primary text-secondary-50"
+              } `}
+            >
+              <GraduationCap className="mr-2 h-4 w-4" />
+              <Link href="/dashboard/create_student">Create New Student</Link>
+            </div>
           </CommandItem>
-          {/* <CommandItem>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
-            <CommandShortcut>⌘S</CommandShortcut>
-          </CommandItem> */}
         </CommandGroup>
       </CommandList>
     </Command>

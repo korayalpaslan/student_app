@@ -24,7 +24,7 @@ const PerformenceDetailTable = ({ data }: any) => {
               Eagerly participates in class activities
             </TableCell>
             <TableCell className="font-medium text-center">
-              {data.data.criteria_one}
+              {data.data.criterias[0]}
             </TableCell>
           </TableRow>
           <TableRow>
@@ -32,7 +32,7 @@ const PerformenceDetailTable = ({ data }: any) => {
               Tackles challenges with hard work and determination
             </TableCell>
             <TableCell className="font-medium text-center">
-              {data.data.criteria_two}
+              {data.data.criterias[1]}
             </TableCell>
           </TableRow>
           <TableRow>
@@ -40,7 +40,7 @@ const PerformenceDetailTable = ({ data }: any) => {
               Keeps a positive outlook in every situation.
             </TableCell>
             <TableCell className="font-medium text-center">
-              {data.data.criteria_three}
+              {data.data.criterias[2]}
             </TableCell>
           </TableRow>
           <TableRow>
@@ -48,7 +48,16 @@ const PerformenceDetailTable = ({ data }: any) => {
               Displays independence when completing tasks
             </TableCell>
             <TableCell className="font-medium text-center">
-              {data.data.criteria_three}
+              {data.data.criterias[3]}
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="font-medium">
+              Communicates clearly and, in a manner, suitable for his level of
+              proficiency
+            </TableCell>
+            <TableCell className="font-medium text-center">
+              {data.data.criterias[4]}
             </TableCell>
           </TableRow>
         </TableBody>

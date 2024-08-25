@@ -5,6 +5,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  branch: {
+    type: String,
+    required: [true, "Please add a title"],
+  },
   email: {
     type: String,
     required: [true, "Please add a title"],
@@ -16,6 +20,10 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
+    required: [true, "Please add a role"],
+  },
+  isVerified: {
+    type: Boolean,
     required: [true, "Please add a role"],
   },
 });

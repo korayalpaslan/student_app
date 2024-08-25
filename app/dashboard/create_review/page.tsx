@@ -5,6 +5,7 @@ import CreateReview from "@/components/reviews/CreateReview";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { headers } from "next/headers";
+export const dynamic = "force-dynamic";
 
 const getStudents = async () => {
   try {

@@ -4,7 +4,7 @@ import { Newspaper } from "lucide-react";
 
 const DashboardPage = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-center gap-5 mb-5 ">
+    <div className="flex justify-center gap-5 mb-5">
       <DashboardCard
         title="Posts"
         count={100}

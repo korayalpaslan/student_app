@@ -24,18 +24,21 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    return NextResponse.json(
-      { messsage: "Not authorized url" },
-      { status: 401 }
-    );
-  } else {
-    await dbConnect();
-    const students = await Student.find({}).sort({ name: "asc" });
-    return NextResponse.json(
-      { success: true, data: students },
-      { status: 200 }
-    );
-  }
+  // const session = await getServerSession(authOptions);
+  // if (!session) {
+  //   return NextResponse.json(
+  //     { messsage: "Not authorized url" },
+  //     { status: 401 }
+  //   );
+  // } else {
+  //   await dbConnect();
+  //   const students = await Student.find({}).sort({ name: "asc" });
+  //   return NextResponse.json(
+  //     { success: true, data: students },
+  //     { status: 200 }
+  //   );
+  // }
+  await dbConnect();
+  const students = await Student.find({}).sort({ name: "asc" });
+  return NextResponse.json({ success: true, data: students }, { status: 200 });
 }

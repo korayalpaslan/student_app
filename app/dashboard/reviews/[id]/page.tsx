@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import BackButton from "@/components/BackButton";
 import Loading from "./loading";
 import PerformenceDetailTable from "@/components/performance/PerformanceDetailTable";
+export const dynamic = "force-dynamic";
 
 const getReview = async (id: string) => {
   try {

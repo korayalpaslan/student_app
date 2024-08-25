@@ -1,4 +1,5 @@
 import StudentDetailPage from "@/containers/StudentDetailPage";
+export const dynamic = "force-dynamic";
 
 const PostsPage = ({ params }: any) => {
   return (

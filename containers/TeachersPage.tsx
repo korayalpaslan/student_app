@@ -11,7 +11,7 @@ const getTeachers = async () => {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/teachers`, {
       method: "GET",
       headers: headers(),
-      cache: "no-store",
+      cache: "force-cache",
     });
     if (!res.ok) throw new Error("failed to fetch request");
     return res.json();

@@ -138,9 +138,24 @@ const CreateStudent = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Sınıfı</FormLabel>
-                      <FormControl>
-                        <Input placeholder="" {...field} />
-                      </FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Öğrencinin sınıfı" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="5">5</SelectItem>
+                          <SelectItem value="6">6</SelectItem>
+                          <SelectItem value="7">7</SelectItem>
+                          <SelectItem value="8">8</SelectItem>
+                          <SelectItem value="9">9</SelectItem>
+                          <SelectItem value="10">10</SelectItem>
+                          <SelectItem value="11">11</SelectItem>
+                          <SelectItem value="12">12</SelectItem>
+                        </SelectContent>
+                      </Select>
 
                       <FormMessage />
                     </FormItem>

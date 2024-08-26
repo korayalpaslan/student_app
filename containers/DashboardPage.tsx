@@ -1,36 +1,45 @@
 import React from "react";
 import DashboardCard from "@/components/dashboard/DashboardPage/DashboardCard";
-import { Newspaper } from "lucide-react";
+import { GraduationCap, TrendingUp, BookOpenText, Users } from "lucide-react";
 
 const DashboardPage = () => {
   return (
     <div className="flex justify-center gap-5 mb-5">
       <DashboardCard
-        title="Posts"
-        count={100}
+        title="Kayıtlı Öğrenci"
+        count={28}
         icon={
-          <Newspaper className="text-slate-500 dark:text-slate-200" size={32} />
+          <GraduationCap
+            className="text-slate-500 dark:text-slate-200"
+            size={32}
+          />
         }
       />
       <DashboardCard
-        title="Users"
-        count={200}
+        title="Kayıtlı Öğretmen"
+        count={6}
         icon={
-          <Newspaper className="text-slate-500 dark:text-slate-200" size={32} />
+          <Users className="text-slate-500 dark:text-slate-200" size={32} />
         }
       />
       <DashboardCard
-        title="Categories"
-        count={300}
+        title="Gerçekleşen Ders"
+        count={89}
         icon={
-          <Newspaper className="text-slate-500 dark:text-slate-200" size={32} />
+          <BookOpenText
+            className="text-slate-500 dark:text-slate-200"
+            size={32}
+          />
         }
       />
       <DashboardCard
-        title="Comments"
-        count={400}
+        title="Başarı Ortalaması"
+        count={2.8}
         icon={
-          <Newspaper className="text-slate-500 dark:text-slate-200" size={32} />
+          <TrendingUp
+            className="text-slate-500 dark:text-slate-200"
+            size={32}
+          />
         }
       />
     </div>

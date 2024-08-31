@@ -1,7 +1,7 @@
 import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
-// import { headers } from "next/headers";
+import { headers } from "next/headers";
 import { Suspense } from "react";
 import Loading from "@/app/dashboard/loading";
 import DashboardHeader from "@/components/dashboard/DashboardPage/DashboardHeader";
@@ -11,6 +11,7 @@ const getStudents = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/students`, {
       method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");
@@ -24,6 +25,7 @@ const getReviews = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reviews`, {
       method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");
@@ -36,6 +38,8 @@ const getReviews = async () => {
 const getTeachers = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/teachers`, {
+      method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");
@@ -47,6 +51,8 @@ const getTeachers = async () => {
 const getReports = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reports`, {
+      method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");

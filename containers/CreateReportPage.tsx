@@ -4,13 +4,14 @@ import { authOptions } from "@/lib/authOptions";
 import BackButton from "@/components/BackButton";
 import { Suspense } from "react";
 import Loading from "@/app/dashboard/create_report/loading";
-// import { headers } from "next/headers";
+import { headers } from "next/headers";
 import MultiStepForm from "@/components/dashboard/CreateReportPage/MultiStepForm";
 
 const getStudents = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/students`, {
       method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");
@@ -24,6 +25,7 @@ const getReviews = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reviews`, {
       method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");
@@ -36,6 +38,8 @@ const getReviews = async () => {
 const getTeachers = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/teachers`, {
+      method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");

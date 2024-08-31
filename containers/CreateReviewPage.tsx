@@ -4,13 +4,14 @@ import BackButton from "@/components/BackButton";
 import CreateReview from "@/components/dashboard/CreateReviewPage/CreateReview";
 import { Suspense } from "react";
 import Loading from "@/app/dashboard/create_review/loading";
-// import { headers } from "next/headers";
+import { headers } from "next/headers";
 export const dynamic = "force-dynamic";
 
 const getStudents = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/students`, {
       method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");
@@ -23,6 +24,8 @@ const getStudents = async () => {
 const getTeachers = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/teachers`, {
+      method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");

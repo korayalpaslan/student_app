@@ -2,11 +2,14 @@ import { Suspense } from "react";
 import BackButton from "@/components/BackButton";
 import Loading from "@/app/dashboard/reviews/[id]/loading";
 import PerformenceDetailTable from "@/components/dashboard/ReviewDetailPage/PerformanceDetailTable";
+import { headers } from "next/headers";
 export const dynamic = "force-dynamic";
 
 const getReview = async (id: string) => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reviews/${id}`, {
+      method: "GET",
+      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");

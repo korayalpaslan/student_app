@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import {
   LineChart,
   Line,
@@ -15,23 +16,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 const Analytics = ({ data }: any) => {
-  // const newArray = data.map((item: any) => {
-  //   const itemArray = new Array(
-  //     +item.criteria_one.toFixed(2),
-  //     +item.criteria_two.toFixed(2),
-  //     +item.criteria_three.toFixed(2),
-  //     +item.criteria_four.toFixed(2)
-  //   );
+  const thisMonth = new Date().getMonth();
+  const [currentMonth, setCurrentMonth] = useState("this");
 
-  //   return itemArray;
-  // });
-
-  // const updatedArray = newArray.map((item: any) => {
-  //   const array = item.reduce((a: any, b: any) => a + b) / item.length;
-  //   return array;
-  // });
+  const month = currentMonth === "this" ? thisMonth : thisMonth - 1;
 
   const arraySum = (arr: any) => {
     const array =
@@ -40,10 +32,14 @@ const Analytics = ({ data }: any) => {
   };
 
   const newData = data
+    .filter((item: any) => item.isAttended === true)
+    .filter((item: any) => {
+      return new Date(item.lesson_date).getMonth() === month;
+    })
     .map((item: any, i: any) => {
       const update = {
         ...item,
-        lesson_date: new Date(item.lesson_date).toLocaleDateString("tr-TR", {
+        lesson_date: new Date(item.lesson_date).toLocaleDateString("en-EN", {
           month: "long",
           day: "numeric",
         }),
@@ -55,12 +51,12 @@ const Analytics = ({ data }: any) => {
     .reverse();
 
   return (
-    <>
+    <div className="w-full">
       <Card>
         <CardHeader>
-          <CardTitle>Performans Çizelgesi</CardTitle>
+          <CardTitle>Monthly Lesson Performance</CardTitle>
           <CardDescription>
-            4 puan üzerinden yapılan değerlendirmedir
+            Based on a four-point scoring system
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -89,8 +85,27 @@ const Analytics = ({ data }: any) => {
             </ResponsiveContainer>
           </div>
         </CardContent>
+        <RadioGroup
+          defaultValue={currentMonth}
+          onValueChange={(): any =>
+            setCurrentMonth((prevState) =>
+              prevState === "this" ? "previous" : "this"
+            )
+          }
+        >
+          <div className="flex items-center px-6 py-4 space-x-4">
+            <div className="flex items-center  space-x-2">
+              <RadioGroupItem id="r1" value="this" />
+              <Label htmlFor="r1">This Month</Label>
+            </div>
+            <div className="flex items-center  space-x-2">
+              <RadioGroupItem id="r1" value="previous" />
+              <Label htmlFor="r1">Previous Month</Label>
+            </div>
+          </div>
+        </RadioGroup>
       </Card>
-    </>
+    </div>
   );
 };
 

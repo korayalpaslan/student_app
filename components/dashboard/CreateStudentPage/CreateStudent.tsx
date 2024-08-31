@@ -77,8 +77,8 @@ const CreateStudent = () => {
       if (res.ok) {
         toast({
           variant: "success",
-          title: "Tebrikler",
-          description: "Yeni öğrenci kaydınız başarılı ile oluşturuldu.",
+          title: "Congrats 🎉",
+          description: "You have created a new student successfully",
         });
         form.reset({
           fullname: "",
@@ -102,10 +102,10 @@ const CreateStudent = () => {
     <div className="mt-8">
       <div className="pb-4 border-b border-b-gray-200 mb-8">
         <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-          Yeni Öğrenci Kaydı
+          Register New Student
         </h4>
         <p className="text-sm text-muted-foreground">
-          Yeni kayıt edeceğiniz öğrencinin bilgilerini eksiksiz giriniz
+          Please fill out and submit the form below completely
         </p>
       </div>
       <Form {...form}>
@@ -121,7 +121,7 @@ const CreateStudent = () => {
                   name="fullname"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>İsim Soyisim</FormLabel>
+                      <FormLabel>Name & Surname</FormLabel>
                       <FormControl>
                         <Input placeholder="" {...field} />
                       </FormControl>
@@ -137,13 +137,13 @@ const CreateStudent = () => {
                   name="class"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Sınıfı</FormLabel>
+                      <FormLabel>Class</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         value={field.value}
                       >
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Öğrencinin sınıfı" />
+                          <SelectValue placeholder="Select Student's Class" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="5">5</SelectItem>
@@ -170,20 +170,21 @@ const CreateStudent = () => {
                   name="level"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>İngilizce Düzeyi</FormLabel>
+                      <FormLabel>English Level</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         value={field.value}
                       >
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Öğrencinin eğitim alacağı ingilizce düzeyi" />
+                          <SelectValue placeholder="Select Student's Level" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="A1">A1</SelectItem>
                           <SelectItem value="A1+">A1+</SelectItem>
+                          <SelectItem value="A2">A2</SelectItem>
+                          <SelectItem value="A2+">A2+</SelectItem>
                           <SelectItem value="B1">B1</SelectItem>
                           <SelectItem value="B1+">B1+</SelectItem>
-                          <SelectItem value="C">C</SelectItem>
+                          <SelectItem value="B2">B2</SelectItem>
                         </SelectContent>
                       </Select>
 
@@ -198,7 +199,7 @@ const CreateStudent = () => {
                   name="birth_date"
                   render={({ field }) => (
                     <FormItem className="flex flex-col mt-2">
-                      <FormLabel className="mb-1">Doğum Tarihi</FormLabel>
+                      <FormLabel className="mb-1">Date of Birth</FormLabel>
 
                       <Popover>
                         <PopoverTrigger asChild>
@@ -224,7 +225,7 @@ const CreateStudent = () => {
                             selected={field.value}
                             onSelect={field.onChange}
                             fromYear={1960}
-                            toYear={2030}
+                            toYear={2020}
                           />
                         </PopoverContent>
                       </Popover>
@@ -238,7 +239,7 @@ const CreateStudent = () => {
           </div>
 
           <Button type="submit" className="lg:w-1/4">
-            {isLoading ? <p>Kayıt Yapılıyor...</p> : <p>Oluştur</p>}
+            {isLoading ? <p>Please Wait</p> : <p>Submit</p>}
           </Button>
         </form>
       </Form>

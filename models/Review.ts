@@ -8,6 +8,10 @@ const ReviewSchema: any = new mongoose.Schema({
     type: Array,
     required: [true, "Please rate the criteria"],
   },
+  level: {
+    type: String,
+    required: true,
+  },
   teacher: [{ type: mongoose.Schema.Types.ObjectId, ref: User }],
   lesson_date: {
     type: Date,
@@ -16,6 +20,9 @@ const ReviewSchema: any = new mongoose.Schema({
   isAttended: {
     type: Boolean,
     required: true,
+  },
+  comment: {
+    type: String,
   },
 });
 

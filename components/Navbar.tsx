@@ -27,7 +27,7 @@ const Navbar = ({ username }: UsernameProps) => {
   return (
     <div className="bg-primary dark:bg-slate-700 text-white py-2 px-5 flex justify-between items-center h-[10vh] fixed z-50 top-0 w-full">
       <Link href="/dashboard" className="font-bold text-4xl flex items-center">
-        <Target size={32} /> <span className="ml-2 mb-2">score app</span>
+        <Target size={32} /> <span className="ml-2 mb-2">stapp</span>
       </Link>
 
       <DropdownMenu>

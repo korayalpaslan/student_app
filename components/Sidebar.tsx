@@ -21,6 +21,8 @@ import {
   User,
   GraduationCap,
   Star,
+  BookText,
+  FolderOpen,
 } from "lucide-react";
 
 const Sidebar = () => {
@@ -49,7 +51,7 @@ const Sidebar = () => {
               } `}
             >
               <Gauge className="mr-2 h-4 w-4" />
-              <Link href="/dashboard/students">Student List</Link>
+              <Link href="/dashboard/students">Performance List</Link>
             </div>
           </CommandItem>
           <CommandItem>
@@ -61,6 +63,28 @@ const Sidebar = () => {
             >
               <Star className="mr-2 h-4 w-4" />
               <Link href="/dashboard/create_review">Create Review</Link>
+            </div>
+          </CommandItem>
+          <CommandItem>
+            <div
+              className={`flex items-center w-full h-full px-2 py-2.5 rounded-md ${
+                pathname === "/dashboard/create_report" &&
+                "bg-primary text-secondary-50"
+              } `}
+            >
+              <BookText className="mr-2 h-4 w-4" />
+              <Link href="/dashboard/create_report">Create Report</Link>
+            </div>
+          </CommandItem>
+          <CommandItem>
+            <div
+              className={`flex items-center w-full h-full px-2 py-2.5 rounded-md ${
+                pathname === "/dashboard/my_reports" &&
+                "bg-primary text-secondary-50"
+              } `}
+            >
+              <FolderOpen className="mr-2 h-4 w-4" />
+              <Link href="/dashboard/my_reports">My Reports</Link>
             </div>
           </CommandItem>
         </CommandGroup>

@@ -13,6 +13,7 @@ import {
   FormMessage,
   FormDescription,
 } from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { format } from "date-fns";
@@ -57,12 +58,14 @@ const formSchema = z.object({
   criteria_five: z.enum(["1", "2", "3", "4"], {
     required_error: "You need to select a notification type.",
   }),
+  comment: z.string(),
 });
 
-const CreateReview = ({ data, teacher_id }: any) => {
+const CreateReview = ({ students, teacher_id }: any) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [isChecked, setChecked] = useState(true);
+  const [level, setLevel] = useState("");
   const [error, serError] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,12 +77,17 @@ const CreateReview = ({ data, teacher_id }: any) => {
       criteria_three: "1",
       criteria_four: "1",
       criteria_five: "1",
+      comment: "",
     },
   });
 
   const submitHandler = async (data: z.infer<typeof formSchema>) => {
     const lesson_date = moment(data.birth_date).add(3, "hour");
     setIsLoading(true);
+    const studentLevel = students.data.find(
+      (student: any) => student._id === data.student
+    );
+
     try {
       const res = await fetch(`${process.env.API_URL}/api/reviews`, {
         method: "POST",
@@ -94,6 +102,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
             Number(data.criteria_five),
           ],
           teacher: teacher_id,
+          level: studentLevel.level,
           lesson_date,
           isAttended: isChecked,
         }),
@@ -101,9 +110,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
       if (res.ok) {
         toast({
           variant: "success",
-          title: "Tebrikler",
-          description:
-            "Yeni ders değerlendirme kaydınız başarılı ile oluşturuldu.",
+          title: "Congrats 🎉",
+          description: "You have created a new review",
         });
         form.reset({
           student: "",
@@ -113,6 +121,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
           criteria_three: "1",
           criteria_four: "1",
           criteria_five: "1",
+          comment: "",
         });
         setIsLoading(false);
       } else {
@@ -127,7 +136,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 max-w-[1000px]">
       <div className="pb-4 border-b border-b-gray-200 mb-8">
         <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
           Create a review
@@ -161,9 +170,13 @@ const CreateReview = ({ data, teacher_id }: any) => {
                           <SelectValue placeholder="Select the student" />
                         </SelectTrigger>
                         <SelectContent>
-                          {data.data.map((item: any) => {
+                          {students.data.map((item: any) => {
                             return (
-                              <SelectItem key={item._id} value={item._id}>
+                              <SelectItem
+                                key={item._id}
+                                value={item._id}
+                                // value={item._id}
+                              >
                                 {item.fullname}
                               </SelectItem>
                             );
@@ -250,9 +263,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
                       name="criteria_one"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>
-                            1 - Eagerly participates in class activities
-                          </FormLabel>
+                          <FormLabel>GRAMMAR</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -267,7 +278,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Needs Improvement
+                                  Numerous errors that greatly hinder
+                                  understanding
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -278,7 +290,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Satisfactory
+                                  Frequent errors that impact understanding
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -289,7 +301,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Good
+                                  Several errors that slightly impact
+                                  understanding
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -300,7 +313,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Excellent
+                                  Mostly accurate with minor errors
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -318,10 +331,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
                       name="criteria_two"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>
-                            2 - Tackles challenges with hard work and
-                            determination
-                          </FormLabel>
+                          <FormLabel>VOCABULARY</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -336,7 +346,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Needs Improvement
+                                  Very limited vocabulary; heavy reliance on
+                                  simple words
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -347,7 +358,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Satisfactory
+                                  Limited vocabulary with frequent repetition
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -358,7 +369,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Good
+                                  Uses a basic range of vocabulary with some
+                                  repetition
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -369,7 +381,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Excellent
+                                  Good use of varied vocabulary with occasional
+                                  repetition
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -387,9 +400,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
                       name="criteria_three"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>
-                            3 - Keeps a positive outlook in every situation.
-                          </FormLabel>
+                          <FormLabel>COMMUNICATION</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -404,7 +415,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Needs Improvement
+                                  Rarely listens or responds appropriately,
+                                  causing breakdowns in communication
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -415,7 +427,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Satisfactory
+                                  Frequently misses cues and struggles to
+                                  respond appropriately
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -426,7 +439,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Good
+                                  Sometimes struggles to respond appropriately
+                                  or misses cues
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -437,7 +451,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Excellent
+                                  Usually listens and responds appropriately
+                                  with minor lapses
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -455,9 +470,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
                       name="criteria_four"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>
-                            4 - Displays independence when completing tasks.
-                          </FormLabel>
+                          <FormLabel>PRONUNCIATION</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -472,7 +485,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Needs Improvement
+                                  Pronunciation is unclear and difficult to
+                                  understand
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -483,7 +497,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Satisfactory
+                                  Pronunciation is frequently unclear, causing
+                                  confusion
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -494,7 +509,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Good
+                                  Pronunciation is understandable but with
+                                  noticeable errors
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -505,7 +521,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Excellent
+                                  Generally clear pronunciation with minor
+                                  lapses
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -523,10 +540,7 @@ const CreateReview = ({ data, teacher_id }: any) => {
                       name="criteria_five"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>
-                            5 - Communicates clearly and, in a manner, suitable
-                            for his level of proficiency.
-                          </FormLabel>
+                          <FormLabel>FLUENCY</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -541,7 +555,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Needs Improvement
+                                  Speech is halting with frequent pauses, making
+                                  communication difficult
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -552,7 +567,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Satisfactory
+                                  Frequent hesitations and pauses hinder
+                                  communication
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -563,7 +579,8 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Good
+                                  Noticeable pauses or hesitations disrupt the
+                                  flow
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -574,11 +591,33 @@ const CreateReview = ({ data, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Excellent
+                                  Generally smooth with occasional hesitations
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
                           </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="grid gap-4 mb-4 col-span-2 lg:col-span-1">
+                  <div className="grid gap-4">
+                    <FormField
+                      control={form.control}
+                      name="comment"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Additional Comment</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              className="bg-slate-100 dark:bg-slate-500 border-0 focus-visible:ring-0 text-black dark:text-white focus-visible:ring-offset-0"
+                              placeholder="Anything to highlight"
+                              {...field}
+                            />
+                          </FormControl>
+
                           <FormMessage />
                         </FormItem>
                       )}

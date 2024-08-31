@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import BackButton from "@/components/BackButton";
 import PostsTable from "@/components/dashboard/TeachersPage/PostsTable";
 import Loading from "@/app/loading";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 
@@ -10,7 +10,6 @@ const getTeachers = async () => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/teachers`, {
       method: "GET",
-      headers: headers(),
       cache: "force-cache",
     });
     if (!res.ok) throw new Error("failed to fetch request");
@@ -27,7 +26,7 @@ export const TeachersPage = async () => {
 
   return (
     <div>
-      <BackButton text="Ana Sayfa" link="/dashboard" />
+      <BackButton text="Overview" link="/dashboard" />
       <Suspense fallback={<Loading />}>
         <PostsTable
           data={dataResponse[0].data}

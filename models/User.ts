@@ -5,10 +5,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  branch: {
-    type: String,
-    required: [true, "Please add a title"],
-  },
   email: {
     type: String,
     required: [true, "Please add a title"],

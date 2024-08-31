@@ -1,46 +1,11 @@
-import { Suspense } from "react";
-import BackButton from "@/components/BackButton";
-import Loading from "./loading";
-import PerformenceDetailTable from "@/components/performance/PerformanceDetailTable";
+import ReviewDetailPage from "@/containers/ReviewDetailPage";
 export const dynamic = "force-dynamic";
 
-const getReview = async (id: string) => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reviews/${id}`, {
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
-};
-
 const ReviewDetail = async ({ params }: any) => {
-  const review = await getReview(params.id);
-
-  const date = new Date(review.data.lesson_date).toLocaleDateString("tr-TR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
   return (
-    <div>
-      <BackButton
-        text="Performans Tablosu"
-        link={`/dashboard/students/${review.data.student[0]._id}`}
-      />
-      <div className="pb-4 border-b border-b-gray-200 mb-8">
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-          {date} / Değerlendirme Detayı
-        </h4>
-        <p className="text-sm text-muted-foreground lg:w-1/2 mt-4">
-          Değerlendiren Öğretmen: {review.data.teacher[0].name}
-        </p>
-        <PerformenceDetailTable data={review} />
-      </div>
-    </div>
+    <>
+      <ReviewDetailPage params={params} />
+    </>
   );
 };
 

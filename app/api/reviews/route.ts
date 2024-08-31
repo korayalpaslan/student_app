@@ -6,13 +6,6 @@ import { dbConnect } from "@/lib/dbConnect";
 
 export async function POST(request: Request) {
   await dbConnect();
-  // const session = await getServerSession(authOptions);
-  // if (!session) {
-  //   return NextResponse.json(
-  //     { messsage: "Not authorized url" },
-  //     { status: 401 }
-  //   );
-  // }
   const review = await request.json();
 
   await Review.create(review);
@@ -24,14 +17,13 @@ export async function POST(request: Request) {
 
 export async function GET(request: NextRequest) {
   await dbConnect();
-  // const session = await getServerSession(authOptions);
-  // if (!session) {
-  //   return NextResponse.json(
-  //     { messsage: "Not authorized url" },
-  //     { status: 401 }
-  //   );
-  // }
   const query = request.nextUrl.searchParams.get("query");
-  const reviews = await Review.find({ student: query }).sort("-lesson_date");
+  let reviews;
+  if (query) {
+    reviews = await Review.find({ student: query }).sort("-lesson_date");
+  } else {
+    reviews = await Review.find({}).sort("-lesson_date");
+  }
+
   return NextResponse.json({ success: true, data: reviews }, { status: 200 });
 }

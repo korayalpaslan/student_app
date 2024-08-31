@@ -15,10 +15,10 @@ export default async function RootLayout({
     <main>
       <Navbar username={session.user.name} />
       <div className="flex">
-        <div className="hidden xl:block mt-[10vh] w-[300px] h-[90vh]">
+        <div className="hidden xl:block mt-[10vh]  w-[300px] h-[90vh]">
           <Sidebar />
         </div>
-        <div className="p-10 grow mt-[10vh] max-w-[1000px] mx-auto">
+        <div className="p-10 grow mt-[10vh] max-w-[1140px] mx-auto">
           {children}
         </div>
       </div>

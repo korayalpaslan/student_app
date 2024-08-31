@@ -1,15 +1,14 @@
 import { Suspense } from "react";
 import BackButton from "@/components/BackButton";
-import PerformanceListTable from "@/components/students/studentdetail/PerformanceListTable";
-import Analytics from "@/components/students/studentdetail/Analytics";
-import Loading from "@/app/loading";
-import { headers } from "next/headers";
+import PerformanceListTable from "@/components/dashboard/StudentDetailsPage/PerformanceListTable";
+import Analytics from "@/components/dashboard/StudentDetailsPage/Analytics";
+import Loading from "@/app/dashboard/students/[id]/loading";
+// import { headers } from "next/headers";
 
 const getStudent = async (id: string) => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/students/${id}`, {
       method: "GET",
-      headers: headers(),
       cache: "no-store",
     });
     if (!res.ok) throw new Error("failed to fetch request");
@@ -40,7 +39,7 @@ const StudentDetailPage = async ({ params }: any) => {
 
   return (
     <div>
-      <BackButton text="Performans Tablosu" link="/dashboard/students" />
+      <BackButton text="Performance List" link="/dashboard/students" />
       <div className="pb-4 mb-8">
         <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
           {student.data.fullname} Performance Track

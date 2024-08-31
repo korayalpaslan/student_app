@@ -1,11 +1,11 @@
 import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
-// import { headers } from "next/headers";
+import BackButton from "@/components/BackButton";
 import { Suspense } from "react";
-import Loading from "@/app/dashboard/loading";
-import DashboardHeader from "@/components/dashboard/DashboardPage/DashboardHeader";
-import Analytics from "@/components/dashboard/DashboardPage/Analytics";
+import Loading from "@/app/dashboard/create_report/loading";
+// import { headers } from "next/headers";
+import MultiStepForm from "@/components/dashboard/CreateReportPage/MultiStepForm";
 
 const getStudents = async () => {
   try {
@@ -44,45 +44,35 @@ const getTeachers = async () => {
     console.log("Error loading events", error);
   }
 };
-const getReports = async () => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reports`, {
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
-};
 
-const DashboardPage = async () => {
+const CreateReportPage = async () => {
   const data1 = getStudents();
   const data2 = getReviews();
   const data3: any = getServerSession(authOptions);
   const data4 = getTeachers();
-  const data5 = getReports();
-  const [students, reviews, user, teachers, reports] = await Promise.all([
+  const [students, reviews, user, teachers] = await Promise.all([
     data1,
     data2,
     data3,
     data4,
-    data5,
   ]);
 
+  const teacher = teachers.data.find(
+    (teacher: any) => teacher.email === user.user.email
+  );
+
   return (
-    <>
+    <div>
+      <BackButton text="Overview" link="/dashboard" />
       <Suspense fallback={<Loading />}>
-        <DashboardHeader
-          student={students.data.length}
-          reports={reports.data.length}
+        <MultiStepForm
+          students={students}
           reviews={reviews}
-          teachers={teachers.data.length}
+          teacher={teacher._id}
         />
-        <Analytics data={reviews.data} />
       </Suspense>
-    </>
+    </div>
   );
 };
 
-export default DashboardPage;
+export default CreateReportPage;

@@ -21,19 +21,18 @@ const PostsTable = ({ data, role }: PostTableProps) => {
         <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
           Registered Teacher List
         </h4>
-        <p className="text-sm text-muted-foreground lg:w-1/2">
+        {/* <p className="text-sm text-muted-foreground lg:w-1/2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit
           malesuada ex eleifend sodales. Ut semper congue ultricies. Aenean elit
           lorem, pharetra et blandit ac, convallis eu augue. Ut suscipit lacus
           nec velit aliquet.
-        </p>
+        </p> */}
       </div>
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Teacher Name</TableHead>
-            <TableHead>Branch</TableHead>
             <TableHead className="hidden md:table-cell">E-mail</TableHead>
             {role === "admin" && (
               <TableHead className="text-center">Status</TableHead>
@@ -45,7 +44,6 @@ const PostsTable = ({ data, role }: PostTableProps) => {
             return (
               <TableRow key={teacher._id}>
                 <TableCell className="font-medium">{teacher.name}</TableCell>
-                <TableCell className="font-medium">{teacher.branch}</TableCell>
                 <TableCell className=" hidden md:table-cell">
                   {teacher.email}
                 </TableCell>

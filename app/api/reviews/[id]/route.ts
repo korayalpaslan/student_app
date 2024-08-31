@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import Review from "@/models/Review";
 import { dbConnect } from "@/lib/dbConnect";
 // import { getServerSession } from "next-auth/next";
@@ -14,6 +14,7 @@ export async function GET(request: Request, { params }: any) {
   //     { status: 401 }
   //   );
   // }
+  console.log(params.id);
   const id = params.id;
   const review = await Review.findOne({ _id: id });
   return NextResponse.json({ success: true, data: review }, { status: 200 });

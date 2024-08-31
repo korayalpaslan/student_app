@@ -32,7 +32,8 @@ const toastVariants = cva(
           "border bg-white text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50",
         destructive:
           "destructive group border-red-500 bg-red-500 text-neutral-50 dark:border-red-900 dark:bg-red-900 dark:text-neutral-50",
-        success: "success group border-green-500 bg-green-500 text-neutral-50",
+        success:
+          "success group border-emerald-300 bg-emerald-300 text-gray-700",
       },
     },
     defaultVariants: {
@@ -63,7 +64,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-neutral-200 bg-transparent px-3 text-sm font-medium ring-offset-white transition-colors hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-neutral-100/40 group-[.destructive]:hover:border-red-500/30 group-[.destructive]:hover:bg-red-500 group-[.destructive]:hover:text-neutral-50 group-[.destructive]:focus:ring-red-500 group-[.success]:border-neutral-100/40 group-[.success]:hover:border-green-500/30 group-[.success]:hover:bg-white group-[.success]:hover:text-green-500 group-[.success]:focus:ring-green-500",
+      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-neutral-200 bg-transparent px-3 text-sm font-medium ring-offset-white transition-colors hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-neutral-100/40 group-[.destructive]:hover:border-red-500/30 group-[.destructive]:hover:bg-red-500 group-[.destructive]:hover:text-neutral-50 group-[.destructive]:focus:ring-red-500 group-[.success]:border-neutral-100/40 group-[.success]:hover:border-emerald-300/30 group-[.success]:hover:bg-white group-[.success]:hover:text-emerald-300 group-[.success]:focus:ring-emerald-300",
       className
     )}
     {...props}

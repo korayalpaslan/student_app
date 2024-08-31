@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { ListCollapse } from "lucide-react";
 const moment = require("moment");
 
 const PerformenceListTable = ({ data }: any) => {
@@ -30,7 +30,7 @@ const PerformenceListTable = ({ data }: any) => {
           <TableBody>
             {data.map((review: any) => {
               const date = new Date(review.lesson_date).toLocaleDateString(
-                "tr-TR",
+                "en-EN",
                 {
                   year: "numeric",
                   month: "long",
@@ -42,15 +42,19 @@ const PerformenceListTable = ({ data }: any) => {
                 <TableRow key={review._id}>
                   <TableCell className="font-medium">{date}</TableCell>
                   <TableCell className="font-medium text-center">
-                    {average(review.criterias)}
+                    {review.isAttended
+                      ? average(review.criterias)
+                      : "Not Attended"}
                   </TableCell>
-                  {/* <TableCell className=" hidden md:table-cell text-center">
-                  {student.level}
-                </TableCell> */}
+
                   <TableCell className="font-medium flex justify-center">
-                    <Link href={`/dashboard/reviews/${review._id}`}>
-                      <Search size={16} />
-                    </Link>
+                    {review.isAttended ? (
+                      <Link href={`/dashboard/reviews/${review._id}`}>
+                        <ListCollapse size={16} />
+                      </Link>
+                    ) : (
+                      " "
+                    )}
                   </TableCell>
                 </TableRow>
               );

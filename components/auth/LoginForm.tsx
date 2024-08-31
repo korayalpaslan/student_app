@@ -20,8 +20,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import logo from "@/public/images/tci-logo.png";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -76,7 +74,7 @@ const LoginForm = () => {
       </div>
       <div className="w-full lg:w-1/2 h-screen flex flex-col">
         <div className="font-bold text-4xl p-12 mx-auto flex items-center">
-          <Target size={32} /> <span className="ml-2 mb-2">score app</span>
+          <Target size={32} /> <span className="ml-2 mb-2">stapp</span>
         </div>
         <Card className="mx-auto lg:w-[450px] max-w-lg my-auto">
           {/* <Image

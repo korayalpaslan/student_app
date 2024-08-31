@@ -1,9 +1,10 @@
-import CreateReviewPage from "@/containers/CreateReviewPage";
+import CreateReportPage from "@/containers/CreateReportPage";
 export const dynamic = "force-dynamic";
+
 const PostsPage = async () => {
   return (
     <>
-      <CreateReviewPage />
+      <CreateReportPage />
     </>
   );
 };

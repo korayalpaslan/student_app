@@ -28,9 +28,6 @@ const registerSchema = z.object({
   name: z.string().min(1, {
     message: "You must enter your name and surname",
   }),
-  branch: z.string().min(1, {
-    message: "You must enter your branch",
-  }),
   email: z.string().email({
     message: "You must enter your email",
   }),
@@ -50,7 +47,6 @@ const LoginForm = () => {
     resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
-      branch: "",
       email: "",
       password: "",
       password2: "",
@@ -80,7 +76,6 @@ const LoginForm = () => {
         });
         form.reset({
           name: "",
-          branch: "",
           email: "",
           password: "",
           password2: "",
@@ -103,7 +98,7 @@ const LoginForm = () => {
       </div>
       <div className="w-full lg:w-1/2 h-screen flex flex-col">
         <div className="font-bold text-4xl px-12 py-8 mx-auto flex items-center">
-          <Target size={32} /> <span className="ml-2 mb-2">score app</span>
+          <Target size={32} /> <span className="ml-2 mb-2">stapp</span>
         </div>
         <Card className="mx-auto lg:w-[450px] max-w-lg">
           {/* <Image
@@ -132,22 +127,6 @@ const LoginForm = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Name & Surname</FormLabel>
-                        <FormControl>
-                          <Input placeholder="" {...field} />
-                        </FormControl>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <FormField
-                    control={form.control}
-                    name="branch"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Branch</FormLabel>
                         <FormControl>
                           <Input placeholder="" {...field} />
                         </FormControl>

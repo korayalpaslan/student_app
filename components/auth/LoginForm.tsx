@@ -24,6 +24,8 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Target } from "lucide-react";
+import Picture from "@/public/images/bg.jpg";
+import Image from "next/image";
 
 const loginSchema = z.object({
   email: z.string().email({
@@ -67,8 +69,15 @@ const LoginForm = () => {
   };
   return (
     <div className="flex">
-      <div className="hidden lg:block bg-[url('/images/bg.jpg')] bg-cover h-screen lg:w-1/2 bg-gray-950">
-        <div className="h-full w-full bg-black/30 text-white text-6xl px-6 py-12 flex items-end">
+      <div className="relative h-screen lg:w-1/2 bg-gray-950">
+        <Image
+          src={Picture}
+          fill
+          alt="Picture"
+          placeholder="blur"
+          className="absolute top-0 bottom-0 right-0 left-0 z-0 h-full w-full object-cover"
+        />
+        <div className="absolute z-10 h-full w-full bg-black/30 text-white text-6xl px-6 py-12 flex items-end">
           Track your student performance efficiently
         </div>
       </div>
@@ -77,12 +86,6 @@ const LoginForm = () => {
           <Target size={32} /> <span className="ml-2 mb-2">stapp</span>
         </div>
         <Card className="mx-auto lg:w-[450px] max-w-lg my-auto">
-          {/* <Image
-            src={logo}
-            width={120}
-            alt="TCI Logo"
-            className="mx-auto mt-8"
-          /> */}
           <CardHeader>
             <CardTitle className="text-xl">Welcome Back 👋</CardTitle>
             <CardDescription>

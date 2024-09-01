@@ -61,6 +61,7 @@ const ReportDetails = ({ report }: any) => {
       margin: 10,
     });
   };
+
   return (
     <div className="w-full" id="report">
       <div className="flex items-end justify-between scroll-m-20 text-sm text-muted-foreground tracking-tight border-b-3 pb-4 border-b-gray-400">
@@ -74,7 +75,9 @@ const ReportDetails = ({ report }: any) => {
         <div className="w-2/3 ">
           <div className="font-semibold mb-2 ">
             Öğrenci Adı:{" "}
-            <span className="font-medium ml-2">{report.fullname}</span>
+            <span className="font-medium ml-2">
+              {report.student[0].fullname}
+            </span>
           </div>
           <div className="font-semibold mb-2">
             Sınıfı: <span className="font-medium ml-2">{report.class}</span>

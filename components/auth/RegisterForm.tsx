@@ -23,6 +23,8 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import BackButton from "@/components/BackButton";
 import { Target } from "lucide-react";
+import Picture from "@/public/images/bg2.jpg";
+import Image from "next/image";
 
 const registerSchema = z.object({
   name: z.string().min(1, {
@@ -91,9 +93,16 @@ const LoginForm = () => {
   };
   return (
     <div className="flex">
-      <div className="hidden lg:block bg-[url('/images/bg2.jpg')] bg-cover bg-right h-screen lg:w-1/2 bg-gray-950">
-        <div className="h-full w-full bg-black/30 text-white text-6xl px-6 py-12 flex items-end">
-          Monitor your student progress effectively
+      <div className="relative h-screen lg:w-1/2 bg-gray-950">
+        <Image
+          src={Picture}
+          fill
+          alt="Picture"
+          placeholder="blur"
+          className="absolute top-0 bottom-0 right-0 left-0 z-0 h-full w-full object-cover"
+        />
+        <div className="absolute z-10 h-full w-full bg-black/30 text-white text-6xl px-6 py-12 flex items-end">
+          Track your student performance efficiently
         </div>
       </div>
       <div className="w-full lg:w-1/2 h-screen flex flex-col">

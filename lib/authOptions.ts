@@ -28,12 +28,13 @@ export const authOptions: any = {
   ],
   session: {
     strategy: "jwt",
-    maxAge: 10000,
+    maxAge: 600,
   },
+
   callbacks: {
     jwt({ token, user }: any) {
       if (user) {
-        return { ...token, role: user.role };
+        return { ...token, role: user.role, id: user._id };
       }
       return token;
     },
@@ -43,6 +44,7 @@ export const authOptions: any = {
         user: {
           ...session.user,
           role: token.role,
+          id: token.id,
         },
         expires: Date,
       };

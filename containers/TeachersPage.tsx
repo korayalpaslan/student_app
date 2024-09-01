@@ -21,18 +21,15 @@ const getTeachers = async () => {
 };
 
 export const TeachersPage = async () => {
-  const teachers = getTeachers();
-  const session: any = getServerSession(authOptions);
-  const dataResponse = await Promise.all([teachers, session]);
+  const data1 = getTeachers();
+  const data2: any = getServerSession(authOptions);
+  const [teachers, session] = await Promise.all([data1, data2]);
 
   return (
     <div>
       <BackButton text="Overview" link="/dashboard" />
       <Suspense fallback={<Loading />}>
-        <PostsTable
-          data={dataResponse[0].data}
-          role={dataResponse[1].user.role}
-        />
+        <PostsTable data={teachers.data} role={session.user.role} />
       </Suspense>
     </div>
   );

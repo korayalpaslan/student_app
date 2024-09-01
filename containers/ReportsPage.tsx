@@ -21,37 +21,20 @@ const getReports = async () => {
   }
 };
 
-const getTeachers = async () => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/teachers`, {
-      method: "GET",
-      headers: headers(),
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
-};
-
 const ReportsPage = async () => {
   const data1 = getReports();
-  const data2 = getTeachers();
-  const data3: any = getServerSession(authOptions);
+  const data2: any = getServerSession(authOptions);
 
-  const [reports, teachers, session] = await Promise.all([data1, data2, data3]);
+  const [reports, session] = await Promise.all([data1, data2]);
 
-  const teacher = teachers.data.find(
-    (user: any) => user.email === session.user.email
-  );
+  console.log(reports);
 
   return (
     <div>
       <BackButton text="Overview" link="/dashboard" />
 
       <Suspense fallback={<Loading />}>
-        <MyReportsTable data={reports.data} teacher={teacher} />
+        <MyReportsTable data={reports.data} teacher={session.user.id} />
       </Suspense>
     </div>
   );

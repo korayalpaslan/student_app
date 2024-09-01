@@ -1,6 +1,4 @@
 import React from "react";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
 import { headers } from "next/headers";
 import { Suspense } from "react";
 import Loading from "@/app/dashboard/loading";
@@ -65,15 +63,13 @@ const getReports = async () => {
 const DashboardPage = async () => {
   const data1 = getStudents();
   const data2 = getReviews();
-  const data3: any = getServerSession(authOptions);
-  const data4 = getTeachers();
-  const data5 = getReports();
-  const [students, reviews, user, teachers, reports] = await Promise.all([
+  const data3 = getTeachers();
+  const data4 = getReports();
+  const [students, reviews, teachers, reports] = await Promise.all([
     data1,
     data2,
     data3,
     data4,
-    data5,
   ]);
 
   return (

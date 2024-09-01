@@ -25,7 +25,7 @@ const TableRowComponent = ({ report }: any) => {
         {average(report.performance)}
       </TableCell>
       <TableCell className=" hidden md:flex justify-center">
-        <Link href={`/dashboard/students`}>
+        <Link href={`/dashboard/my_reports/${report._id}`}>
           <Eye size={20} />
         </Link>
       </TableCell>

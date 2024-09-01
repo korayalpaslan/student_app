@@ -21,36 +21,16 @@ const getStudents = async () => {
   }
 };
 
-const getTeachers = async () => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/teachers`, {
-      method: "GET",
-      headers: headers(),
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
-};
-
 const CreateReviewPage = async () => {
-  const students = getStudents();
-  const teachers = getTeachers();
-  const session: any = getServerSession(authOptions);
+  const data1 = getStudents();
+  const data2: any = getServerSession(authOptions);
+  const [students, session] = await Promise.all([data1, data2]);
 
-  const dataResponse = await Promise.all([students, teachers, session]);
-
-  const teacher = dataResponse[1].data.find(
-    (user: any) => user.email === dataResponse[2].user.email
-  );
   return (
     <div>
       <BackButton text="Overview" link="/dashboard" />
-
       <Suspense fallback={<Loading />}>
-        <CreateReview students={dataResponse[0]} teacher_id={teacher._id} />
+        <CreateReview students={students} teacher_id={session.user.id} />
       </Suspense>
     </div>
   );

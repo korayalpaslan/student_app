@@ -21,7 +21,7 @@ import { Label } from "@/components/ui/label";
 
 const Analytics = ({ data }: any) => {
   const thisMonth = new Date().getMonth();
-  const [currentMonth, setCurrentMonth] = useState("this");
+  const [currentMonth, setCurrentMonth] = useState("previous");
 
   const month = currentMonth === "this" ? thisMonth : thisMonth - 1;
 
@@ -95,12 +95,12 @@ const Analytics = ({ data }: any) => {
         >
           <div className="flex items-center px-6 py-4 space-x-4">
             <div className="flex items-center  space-x-2">
-              <RadioGroupItem id="r1" value="this" />
-              <Label htmlFor="r1">This Month</Label>
-            </div>
-            <div className="flex items-center  space-x-2">
               <RadioGroupItem id="r1" value="previous" />
               <Label htmlFor="r1">Previous Month</Label>
+            </div>
+            <div className="flex items-center  space-x-2">
+              <RadioGroupItem id="r1" value="this" />
+              <Label htmlFor="r1">This Month</Label>
             </div>
           </div>
         </RadioGroup>

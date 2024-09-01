@@ -37,7 +37,7 @@ const StudentTable = ({ data, teacher }: any) => {
         </TableHeader>
         <TableBody>
           {data
-            .filter((item: any) => item.teacher[0]._id === teacher._id)
+            .filter((item: any) => item.teacher[0]._id === teacher)
             .map((report: any) => {
               return <TableRowComponent key={report._id} report={report} />;
             })}

@@ -21,7 +21,11 @@ const ReportSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  report_period: {
+  report_start_date: {
+    type: Date,
+    required: true,
+  },
+  report_end_date: {
     type: Date,
     required: true,
   },
@@ -35,6 +39,10 @@ const ReportSchema = new mongoose.Schema({
   },
   numberOfLessonAbsense: {
     type: Number,
+    required: true,
+  },
+  lessonAverage: {
+    type: Array,
     required: true,
   },
 });

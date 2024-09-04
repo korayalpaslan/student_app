@@ -27,12 +27,9 @@ const ReportsPage = async () => {
 
   const [reports, session] = await Promise.all([data1, data2]);
 
-  console.log(reports);
-
   return (
     <div>
       <BackButton text="Overview" link="/dashboard" />
-
       <Suspense fallback={<Loading />}>
         <MyReportsTable data={reports.data} teacher={session.user.id} />
       </Suspense>

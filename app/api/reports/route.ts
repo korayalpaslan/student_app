@@ -15,6 +15,6 @@ export async function POST(request: Request) {
 
 export async function GET() {
   await dbConnect();
-  const reports = await Report.find({}).sort("-report_period");
+  const reports = await Report.find({}).sort("-report_start_date");
   return NextResponse.json({ success: true, data: reports }, { status: 200 });
 }

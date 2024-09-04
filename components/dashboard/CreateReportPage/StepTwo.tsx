@@ -41,11 +41,14 @@ const StepTwo = ({ setComment, setCurrentStep, prev, commentData }: any) => {
             name="comment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Teacher Comment</FormLabel>
+                <FormLabel>
+                  Teacher Comment in{" "}
+                  <span className="font-semibold">Turkish</span>{" "}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     className="bg-slate-100 dark:bg-slate-500 border-0 focus-visible:ring-0 text-black dark:text-white focus-visible:ring-offset-0"
-                    placeholder="Please insert your comment here"
+                    placeholder="Lütfen yorumunuzu Türkçe olarak yazın / Please insert your comment in Turkish"
                     {...field}
                   />
                 </FormControl>

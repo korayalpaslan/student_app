@@ -28,6 +28,9 @@ const StepThree = ({
   comment,
   notAttendedLesson,
   teacher,
+  startDate,
+  endDate,
+  allReviews,
 }: any) => {
   if (!reviews || reviews.length === 0) {
     return (
@@ -57,8 +60,10 @@ const StepThree = ({
     } else {
       level = "B";
     }
+    console.log(allReviews);
 
-    // const reportTerm = new Date(reviews[0].lesson_date).getMonth();
+    const average = (array: any) =>
+      array.reduce((a: any, b: any) => a + b) / array.length;
 
     const array1 = filteredReviews.map((item: any) => item.criterias[0]);
     const array2 = filteredReviews.map((item: any) => item.criterias[1]);
@@ -111,10 +116,19 @@ const StepThree = ({
           fluencyAvg,
         ],
         report_date: new Date(),
-        report_period: new Date(reviews[0].lesson_date),
+        report_start_date: startDate,
+        report_end_date: endDate,
         comment,
         numberOfLessons: filteredReviews.length,
         numberOfLessonAbsense: notAttendedLesson,
+        lessonAverage: allReviews.map((item: any) => {
+          const obj = {
+            average: average(item.criterias),
+            isAttended: item.isAttended,
+            lesson_date: item.lesson_date,
+          };
+          return obj;
+        }),
       };
       try {
         setIsLoading(true);
@@ -135,6 +149,9 @@ const StepThree = ({
           var element = document.getElementById("report");
           html2pdf(element, {
             margin: 10,
+            filename: "stapp_report",
+            image: { type: "jpeg", quality: 1 },
+            html2canvas: { scale: 2 },
           });
           setTimeout(() => {
             window.location.href = "/dashboard/create_report";
@@ -157,7 +174,7 @@ const StepThree = ({
           <Image src={logo} width={150} alt="TCI Logo" className="mr-4" />
         </div>
         <div className="flex justify-between mt-4 text-gray-700">
-          <div className="w-2/3 ">
+          <div className="w-3/5">
             <div className="font-semibold mb-2 ">
               Öğrenci Adı:{" "}
               <span className="font-medium ml-2">{student[0].fullname}</span>
@@ -171,18 +188,21 @@ const StepThree = ({
               <span className="font-medium ml-2">{student[0].level}</span>
             </div>
           </div>
-          <div className="w-1/3">
+          <div className="w-2/5">
             <div className="font-semibold mb-2">
-              Rapor Dönemi:{" "}
+              Rapor Başlangıç Tarihi:{" "}
               <span className="font-medium ml-2">
-                {new Date(reviews[0].lesson_date).toLocaleDateString(
-                  "tr-TR",
-                  options2
-                )}
+                {new Date(startDate).toLocaleDateString("tr-TR", options)}
               </span>
             </div>
             <div className="font-semibold mb-2">
-              Rapor Tarihi:{" "}
+              Rapor Bitiş Tarihi:{" "}
+              <span className="font-medium ml-2">
+                {new Date(endDate).toLocaleDateString("tr-TR", options)}
+              </span>
+            </div>
+            <div className="font-semibold mb-2">
+              Rapor Düzenleme Tarihi:{" "}
               <span className="font-medium ml-2">
                 {" "}
                 {new Date().toLocaleDateString("tr-TR", options)}
@@ -219,7 +239,7 @@ const StepThree = ({
             </div>
           </div>
         </div>
-        <div className="mt-16">
+        <div className="mt-8">
           <Table>
             <TableCaption>A list of your recent invoices.</TableCaption>
             <TableHeader>
@@ -259,6 +279,52 @@ const StepThree = ({
                   {fluencyCommentText}
                 </TableCell>
               </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+        <div className="mt-8">
+          <Table>
+            <TableCaption>A list of your recent invoices.</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Ders Tarihi</TableHead>
+                <TableHead className="text-center">
+                  Ortalama Ders Puanı
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {allReviews.map((review: any) => {
+                const date = new Date(review.lesson_date).toLocaleDateString(
+                  "tr-TR",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }
+                );
+
+                return (
+                  <TableRow key={review._id}>
+                    <TableCell className="font-medium">{date}</TableCell>
+                    <TableCell className="font-medium text-center">
+                      {review.isAttended
+                        ? average(review.criterias)
+                        : "Katılmadı"}
+                    </TableCell>
+
+                    {/* <TableCell className="font-medium flex justify-center">
+                      {review.isAttended ? (
+                        <Link href={`/dashboard/reviews/${review._id}`}>
+                          <ListCollapse size={16} />
+                        </Link>
+                      ) : (
+                        " "
+                      )}
+                    </TableCell> */}
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </div>

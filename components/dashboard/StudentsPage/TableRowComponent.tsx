@@ -7,9 +7,10 @@ const TableRowComponent = ({ student, reviews }: any) => {
     const average = (array: any) =>
       array.reduce((a: any, b: any) => a + b, 0) / array.length;
 
-    const studentReviews = reviews.filter(
-      (item: any) => item.student[0]._id === student._id
-    );
+    const studentReviews = reviews
+      .filter((item: any) => item.student[0]._id === student._id)
+      .filter((item: any) => item.isAttended === true);
+
     let bigArray: any = [];
     studentReviews.forEach((element: any) => {
       return bigArray.push(element.criterias);

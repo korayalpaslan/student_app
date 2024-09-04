@@ -1,7 +1,12 @@
 "use client";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
-import { BookCheck, Ban, Percent } from "lucide-react";
+import {
+  BookCheck,
+  Ban,
+  Percent,
+  LucideScissorsLineDashed,
+} from "lucide-react";
 import {
   Table,
   TableBody,
@@ -20,14 +25,12 @@ import pronunciationComment from "@/lib/pronunciationComment";
 import fluencyComment from "@/lib/fluencyComment";
 
 const ReportDetails = ({ report }: any) => {
+  const average = (array: any) =>
+    array.reduce((a: any, b: any) => a + b) / array.length;
   const options: any = {
     year: "numeric",
     month: "long",
     day: "numeric",
-  };
-  const options2: any = {
-    year: "numeric",
-    month: "long",
   };
 
   let level;
@@ -59,6 +62,9 @@ const ReportDetails = ({ report }: any) => {
     var element = document.getElementById("report");
     html2pdf(element, {
       margin: 10,
+      filename: "stapp_report",
+      image: { type: "jpeg", quality: 1 },
+      html2canvas: { scale: 2 },
     });
   };
 
@@ -88,16 +94,25 @@ const ReportDetails = ({ report }: any) => {
         </div>
         <div className="w-1/3">
           <div className="font-semibold mb-2">
-            Rapor Dönemi:{" "}
+            Rapor Başlangıç Tarihi:{" "}
             <span className="font-medium ml-2">
-              {new Date(report.report_period).toLocaleDateString(
+              {new Date(report.report_start_date).toLocaleDateString(
                 "tr-TR",
-                options2
+                options
               )}
             </span>
           </div>
           <div className="font-semibold mb-2">
-            Rapor Tarihi:{" "}
+            Rapor Bitiş Tarihi:{" "}
+            <span className="font-medium ml-2">
+              {new Date(report.report_end_date).toLocaleDateString(
+                "tr-TR",
+                options
+              )}
+            </span>
+          </div>
+          <div className="font-semibold mb-2">
+            Rapor Düzenleme Tarihi:{" "}
             <span className="font-medium ml-2">
               {" "}
               {new Date().toLocaleDateString("tr-TR", options)}
@@ -132,7 +147,7 @@ const ReportDetails = ({ report }: any) => {
           </div>
         </div>
       </div>
-      <div className="mt-16">
+      <div className="mt-8">
         <Table>
           <TableCaption>A list of your recent invoices.</TableCaption>
           <TableHeader>
@@ -170,6 +185,38 @@ const ReportDetails = ({ report }: any) => {
                 {fluencyCommentText}
               </TableCell>
             </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+      <div className="mt-8">
+        <Table>
+          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Ders Tarihi</TableHead>
+              <TableHead className="text-center">Ortalama Ders Puanı</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {report.lessonAverage.map((lesson: any) => {
+              const date = new Date(lesson.lesson_date).toLocaleDateString(
+                "en-GB",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }
+              );
+
+              return (
+                <TableRow key={lesson._id}>
+                  <TableCell className="font-medium">{date}</TableCell>
+                  <TableCell className="font-medium text-center">
+                    {lesson.isAttended ? lesson.average : "Katılmadı"}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>

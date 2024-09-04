@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const TableRowComponent = ({ report }: any) => {
   const options2: any = {
-    year: "numeric",
+    day: "numeric",
     month: "long",
   };
   const average = (array: any) =>
@@ -16,8 +16,13 @@ const TableRowComponent = ({ report }: any) => {
         {report.student[0].fullname}
       </TableCell>
       <TableCell className="font-medium">{report.teacher[0].name}</TableCell>
-      <TableCell className="font-medium text-center">
-        {new Date(report.report_period).toLocaleDateString("en-EN", options2)}
+      <TableCell className="font-medium">
+        {new Date(report.report_start_date).toLocaleDateString(
+          "en-GB",
+          options2
+        )}{" "}
+        -{" "}
+        {new Date(report.report_end_date).toLocaleDateString("en-GB", options2)}
       </TableCell>
       <TableCell className="font-medium  text-center">{report.level}</TableCell>
       <TableCell className="font-medium  text-center">{report.class}</TableCell>

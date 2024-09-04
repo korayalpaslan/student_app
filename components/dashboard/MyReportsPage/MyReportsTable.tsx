@@ -15,12 +15,6 @@ const StudentTable = ({ data, teacher }: any) => {
         <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
           My Reports
         </h4>
-        {/* <p className="text-sm text-muted-foreground lg:w-1/2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit
-          malesuada ex eleifend sodales. Ut semper congue ultricies. Aenean elit
-          lorem, pharetra et blandit ac, convallis eu augue. Ut suscipit lacus
-          nec velit aliquet.
-        </p> */}
       </div>
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
@@ -28,7 +22,7 @@ const StudentTable = ({ data, teacher }: any) => {
           <TableRow>
             <TableHead>Student</TableHead>
             <TableHead>Reviewed By</TableHead>
-            <TableHead className="text-center">Month</TableHead>
+            <TableHead>Report Period</TableHead>
             <TableHead className="text-center">Level</TableHead>
             <TableHead className="text-center">Class</TableHead>
             <TableHead className="text-center">Average Performance</TableHead>

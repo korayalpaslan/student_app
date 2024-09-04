@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import { addDays } from "date-fns";
 
 const steps = [
   { id: "Step 1", name: "Select Student & Month" },
@@ -14,8 +15,10 @@ const MultiStepForm = ({ students, reviews, teacher }: any) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedStudentId, setSelectedStudentId] = useState("");
   const [selectedStudent, setSelectedStudent] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState();
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [filteredReviews, setFilteredReviews] = useState([]);
+  const [allReviews, setAllReviews] = useState([]);
   const [notAttendedLesson, setNotAttendedLesson] = useState();
   const [comment, setComment] = useState("");
 
@@ -32,25 +35,33 @@ const MultiStepForm = ({ students, reviews, teacher }: any) => {
   };
 
   useEffect(() => {
-    const selectedMonthArray = reviews.data.filter((item: any) => {
-      return new Date(item.lesson_date).getMonth() === selectedMonth;
-    });
+    const tomorrow = addDays(new Date(endDate), 1);
 
+    const selectedReportArray = reviews.data.filter((item: any) => {
+      return (
+        new Date(item.lesson_date) >= startDate &&
+        new Date(item.lesson_date) < tomorrow
+      );
+    });
+    setAllReviews(
+      selectedReportArray.filter(
+        (item: any) => item.student[0]._id === selectedStudentId
+      )
+    );
     setNotAttendedLesson(
-      selectedMonthArray
+      selectedReportArray
         .filter((item: any) => item.student[0]._id === selectedStudentId)
         .filter((item: any) => item.isAttended === false).length
     );
-
     setFilteredReviews(
-      selectedMonthArray
+      selectedReportArray
         .filter((item: any) => item.student[0]._id === selectedStudentId)
         .filter((item: any) => item.isAttended === true)
     );
     setSelectedStudent(
       students.data.filter((item: any) => item._id === selectedStudentId)
     );
-  }, [selectedStudentId, selectedMonth]);
+  }, [selectedStudentId, endDate, startDate]);
 
   return (
     <div>
@@ -91,7 +102,8 @@ const MultiStepForm = ({ students, reviews, teacher }: any) => {
         {currentStep === 0 && (
           <StepOne
             students={students}
-            setSelectedMonth={setSelectedMonth}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
             setSelectedStudentId={setSelectedStudentId}
             setCurrentStep={setCurrentStep}
           />
@@ -108,10 +120,13 @@ const MultiStepForm = ({ students, reviews, teacher }: any) => {
           <StepThree
             prev={prev}
             reviews={filteredReviews}
+            allReviews={allReviews}
             comment={comment}
             student={selectedStudent}
             notAttendedLesson={notAttendedLesson}
             teacher={teacher}
+            startDate={startDate}
+            endDate={endDate}
           />
         )}
       </div>

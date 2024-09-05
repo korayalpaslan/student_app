@@ -57,6 +57,12 @@ const ReportDetails = ({ report }: any) => {
     (report.performance.reduce((a: number, b: number) => a + b, 0) / 5 / 4) *
     100;
 
+  const toFixedIfNecessary = (value: any, dp: any) => {
+    return +parseFloat(value).toFixed(dp);
+  };
+
+  const finalDate = moment(report.report_end_date).subtract(1, "day");
+
   const handleDownload = async () => {
     const html2pdf = await require("html2pdf.js");
     var element = document.getElementById("report");
@@ -105,10 +111,7 @@ const ReportDetails = ({ report }: any) => {
           <div className="font-semibold mb-2">
             Rapor Bitiş Tarihi:{" "}
             <span className="font-medium ml-2">
-              {new Date(report.report_end_date).toLocaleDateString(
-                "tr-TR",
-                options
-              )}
+              {new Date(finalDate).toLocaleDateString("tr-TR", options)}
             </span>
           </div>
           <div className="font-semibold mb-2">

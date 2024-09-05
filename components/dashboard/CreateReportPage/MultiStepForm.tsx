@@ -4,7 +4,7 @@ import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import { addDays } from "date-fns";
-
+const moment = require("moment");
 const steps = [
   { id: "Step 1", name: "Select Student & Month" },
   { id: "Step 2", name: "Add Your Comment" },
@@ -35,12 +35,22 @@ const MultiStepForm = ({ students, reviews, teacher }: any) => {
   };
 
   useEffect(() => {
-    const tomorrow = addDays(new Date(endDate), 1);
+    const today = new Date();
+    const date1 = moment(endDate).format("L");
+    const date2 = moment(today).format("L");
+
+    let until;
+
+    if (date1 === date2) {
+      until = new Date();
+    } else {
+      until = addDays(new Date(endDate), 1);
+    }
 
     const selectedReportArray = reviews.data.filter((item: any) => {
       return (
         new Date(item.lesson_date) >= startDate &&
-        new Date(item.lesson_date) < tomorrow
+        new Date(item.lesson_date) < until
       );
     });
     setAllReviews(

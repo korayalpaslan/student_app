@@ -69,7 +69,7 @@ const LoginForm = () => {
   };
   return (
     <div className="flex">
-      <div className="relative h-screen lg:w-1/2 bg-gray-950">
+      <div className="hidden lg:block relative h-screen lg:w-1/2 bg-gray-950">
         <Image
           src={Picture}
           fill
@@ -81,11 +81,11 @@ const LoginForm = () => {
           Track your student performance efficiently
         </div>
       </div>
-      <div className="w-full lg:w-1/2 h-screen flex flex-col">
-        <div className="font-bold text-4xl p-12 mx-auto flex items-center">
+      <div className="w-full lg:w-1/2 h-screen flex flex-col justify-center px-4">
+        <div className="font-bold text-4xl py-4 mx-auto flex items-center">
           <Target size={32} /> <span className="ml-2 mb-2">stapp</span>
         </div>
-        <Card className="mx-auto lg:w-[450px] max-w-lg my-auto">
+        <Card className="mx-auto lg:w-[450px] max-w-lg">
           <CardHeader>
             <CardTitle className="text-xl">Welcome Back 👋</CardTitle>
             <CardDescription>

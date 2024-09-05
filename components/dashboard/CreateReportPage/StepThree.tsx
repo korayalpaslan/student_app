@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 const moment = require("moment");
+import { addDays } from "date-fns";
 import grammarComment from "@/lib/grammarComment";
 import vocabularyComment from "@/lib/vocabularyComment";
 import commComment from "@/lib/communicationComment";
@@ -60,7 +61,6 @@ const StepThree = ({
     } else {
       level = "B";
     }
-    console.log(allReviews);
 
     const average = (array: any) =>
       array.reduce((a: any, b: any) => a + b) / array.length;
@@ -103,6 +103,19 @@ const StepThree = ({
       100;
 
     const handleSaveAndDownload = async () => {
+      const today = new Date();
+      const date1 = moment(endDate).format("L");
+      const date2 = moment(today).format("L");
+
+      let until;
+
+      if (date1 === date2) {
+        until = moment().add(3, "hour");
+      } else {
+        const d = moment(endDate).add(3, "hour");
+        until = addDays(new Date(d), 1);
+      }
+
       const newReport = {
         student: student[0]._id,
         teacher,
@@ -115,9 +128,9 @@ const StepThree = ({
           pronunciationAvg,
           fluencyAvg,
         ],
-        report_date: new Date(),
-        report_start_date: startDate,
-        report_end_date: endDate,
+        report_date: moment(today).add(3, "hour"),
+        report_start_date: moment(startDate).add(3, "hour"),
+        report_end_date: until,
         comment,
         numberOfLessons: filteredReviews.length,
         numberOfLessonAbsense: notAttendedLesson,

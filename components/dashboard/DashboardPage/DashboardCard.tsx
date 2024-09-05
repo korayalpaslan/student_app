@@ -8,14 +8,14 @@ interface DashboardCardProps {
 
 const DashboardCard = ({ title, count, icon }: DashboardCardProps) => {
   return (
-    <Card className="bg-gray-50 dark:bg-slate-800 p-4 pb-0 min-w-[250px]">
+    <Card className="bg-gray-50 dark:bg-slate-800 p-4 pb-0 min-w-[215px]">
       <CardContent>
-        <h3 className="text-base text-center mb-4 font-bold text-gray-700">
+        <h3 className="text-sm text-center mb-4 font-bold text-gray-700">
           {title}
         </h3>
         <div className="flex gap-5 justify-center items-center text-gray-700">
           {icon}
-          <h3 className="text-xl font-semibold text-gray-700">{count}</h3>
+          <h3 className="text-base font-semibold text-gray-700">{count}</h3>
         </div>
       </CardContent>
     </Card>

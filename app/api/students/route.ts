@@ -39,6 +39,6 @@ export async function GET() {
   //   );
   // }
   await dbConnect();
-  const students = await Student.find({}).sort({ name: "asc" });
+  const students = await Student.find({}).sort({ fullname: "asc" });
   return NextResponse.json({ success: true, data: students }, { status: 200 });
 }

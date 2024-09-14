@@ -46,7 +46,6 @@ const PerformenceListTable = ({ data }: any) => {
                       ? average(review.criterias)
                       : "Not Attended"}
                   </TableCell>
-
                   <TableCell className="font-medium flex justify-center">
                     {review.isAttended ? (
                       <Link href={`/dashboard/reviews/${review._id}`}>

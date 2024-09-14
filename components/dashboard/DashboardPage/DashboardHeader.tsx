@@ -7,7 +7,7 @@ const DashboardHeader = ({ student, reports, reviews, teachers }: any) => {
     (review: any) => review.isAttended === true
   ).length;
   return (
-    <div className="flex justify-center gap-5 mb-5">
+    <div className="flex flex-col md:flex-row items-center justify-center gap-5 mb-5">
       <DashboardCard
         title="Number of Students"
         count={student || 0}

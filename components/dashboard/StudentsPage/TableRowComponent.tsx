@@ -23,7 +23,7 @@ const TableRowComponent = ({ student, reviews }: any) => {
     return (
       <TableRow>
         <TableCell className="font-medium">{student.fullname}</TableCell>
-        <TableCell className="font-medium text-center">
+        <TableCell className="hidden md:block font-medium text-center">
           {student.class}
         </TableCell>
         <TableCell className="font-medium text-center">
@@ -33,9 +33,9 @@ const TableRowComponent = ({ student, reviews }: any) => {
           {toFixedIfNecessary(average(bigArray.flat()).toFixed(2), 2) ||
             "No Reviews"}
         </TableCell>
-        <TableCell className=" hidden md:flex justify-center">
+        <TableCell className="text-center font-medium">
           <Link href={`/dashboard/students/${student._id}`}>
-            <ListCollapse size={20} />
+            <ListCollapse size={20} className="mx-auto" />
           </Link>
         </TableCell>
       </TableRow>

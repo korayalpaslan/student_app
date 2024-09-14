@@ -15,10 +15,8 @@ import {
 import {
   LayoutDashboard,
   Gauge,
-  Folders,
-  CreditCard,
-  Settings,
   User,
+  Users,
   GraduationCap,
   Star,
   BookText,
@@ -99,6 +97,17 @@ const Sidebar = () => {
             >
               <User className="mr-2 h-4 w-4" />
               <Link href="/dashboard/teachers">Teacher List</Link>
+            </div>
+          </CommandItem>
+          <CommandItem>
+            <div
+              className={`flex items-center w-full h-full px-2 py-2.5 rounded-md ${
+                pathname === "/dashboard/student_list" &&
+                "bg-primary text-secondary-50"
+              } `}
+            >
+              <Users className="mr-2 h-4 w-4" />
+              <Link href="/dashboard/student_list">Student List</Link>
             </div>
           </CommandItem>
           <CommandItem>

@@ -3,6 +3,9 @@ import Sidebar from "@/components/Sidebar";
 import { Toaster } from "@/components/ui/toaster";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
+import { ToggleContextProvider } from "@/context/ToggleContext";
+import { ModalContextProvider } from "@/context/ModalContext";
+import MobileMenu from "@/components/MobileMenu";
 
 export default async function RootLayout({
   children,
@@ -13,16 +16,21 @@ export default async function RootLayout({
 
   return (
     <main>
-      <Navbar username={session.user.name} />
-      <div className="flex">
-        <div className="hidden xl:block mt-[10vh]  w-[300px] h-[90vh]">
-          <Sidebar />
-        </div>
-        <div className="p-10 grow mt-[10vh] max-w-[1000px] mx-auto">
-          {children}
-        </div>
-      </div>
-      <Toaster />
+      <ModalContextProvider>
+        <ToggleContextProvider>
+          <Navbar username={session.user.name} />
+          <div className="flex">
+            <div className="hidden xl:block mt-[10vh] w-[300px] h-[90vh]">
+              <Sidebar />
+            </div>
+            <div className="grow mt-[10vh] max-w-[1000px] mx-auto">
+              <MobileMenu />
+              <div className="p-10">{children}</div>
+            </div>
+          </div>
+          <Toaster />
+        </ToggleContextProvider>
+      </ModalContextProvider>
     </main>
   );
 }

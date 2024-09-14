@@ -18,6 +18,7 @@ export const authOptions: any = {
             user.password
           );
           if (!passwordMatch) return null;
+          if (user.isVerified === false) return null;
 
           return user;
         } catch (error) {

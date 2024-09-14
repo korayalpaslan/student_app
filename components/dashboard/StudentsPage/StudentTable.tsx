@@ -27,12 +27,12 @@ const StudentTable = ({ data, reviews }: any) => {
         <TableHeader>
           <TableRow>
             <TableHead>Student Name</TableHead>
-            <TableHead className="text-center">Class</TableHead>
+            <TableHead className="hidden md:table-cell text-center">
+              Class
+            </TableHead>
             <TableHead className="text-center">Level</TableHead>
             <TableHead className="text-center">Average</TableHead>
-            <TableHead className="hidden md:table-cell text-center">
-              Details
-            </TableHead>
+            <TableHead className="text-center">Details</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

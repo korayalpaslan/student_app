@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import { useContext } from "react";
+import ToggleContext from "@/context/ToggleContext";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,12 +14,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Target } from "lucide-react";
+import { Target, Menu } from "lucide-react";
 interface UsernameProps {
   username: string;
 }
 
 const Navbar = ({ username }: UsernameProps) => {
+  const ctx = useContext(ToggleContext);
   const title = username
     .split(" ")
     .map((word) => word.charAt(0))
@@ -26,6 +28,11 @@ const Navbar = ({ username }: UsernameProps) => {
 
   return (
     <div className="bg-primary dark:bg-slate-700 text-white py-2 px-5 flex justify-between items-center h-[10vh] fixed z-50 top-0 w-full">
+      <Menu
+        size={32}
+        className="md:hidden"
+        onClick={() => ctx.toggleMenuHandler()}
+      />
       <Link href="/dashboard" className="font-bold text-4xl flex items-center">
         <Target size={32} /> <span className="ml-2 mb-2">stapp</span>
       </Link>
@@ -41,7 +48,7 @@ const Navbar = ({ username }: UsernameProps) => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <Link href="/profile">Profile</Link>
+            <Link href="/dashboard/profile">Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <a onClick={() => signOut({ callbackUrl: "/" })}>Logout</a>

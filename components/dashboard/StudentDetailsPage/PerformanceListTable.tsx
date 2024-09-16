@@ -112,7 +112,15 @@ const PerformenceListTable = ({ data, totalLength, pageNumber }: any) => {
                         index + 1
                       }`}
                     >
-                      {index + 1}
+                      <span
+                        className={
+                          pageNumber === index + 1
+                            ? "font-semibold"
+                            : "font-normal"
+                        }
+                      >
+                        {index + 1}
+                      </span>
                     </PaginationLink>
                   </PaginationItem>
                 );

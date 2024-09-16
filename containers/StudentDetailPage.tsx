@@ -41,6 +41,10 @@ const StudentDetailPage = async ({ params, searchParams }: any) => {
   const data2 = getReviews(params.id, page);
   const [student, reviews]: any = await Promise.all([data1, data2]);
 
+  const totalLength = reviews.allData.map(
+    (item: any) => item.level === item.student[0].level
+  ).length;
+
   return (
     <div>
       <BackButton text="Performance List" link="/dashboard/students" />
@@ -59,7 +63,7 @@ const StudentDetailPage = async ({ params, searchParams }: any) => {
         <Analytics data={reviews.data} />
         <PerformanceListTable
           data={reviews.data}
-          totalLength={reviews.length}
+          totalLength={totalLength}
           pageNumber={page}
         />
       </Suspense>

@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
   const [reviews, totalReviews]: any = await Promise.all([data1, data2]);
 
   return NextResponse.json(
-    { success: true, data: reviews, length: totalReviews.length },
+    { success: true, data: reviews, allData: totalReviews },
     { status: 200 }
   );
 }

@@ -138,7 +138,7 @@ const StepThree = ({
         comment,
         numberOfLessons: filteredReviews.length,
         numberOfLessonAbsense: notAttendedLesson,
-        lessonAverage: allReviews.map((item: any) => {
+        lessonAverage: filteredReviews.map((item: any) => {
           const obj = {
             average: average(item.criterias),
             isAttended: item.isAttended,
@@ -315,7 +315,7 @@ const StepThree = ({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {allReviews.map((review: any) => {
+              {filteredReviews.map((review: any) => {
                 const date = new Date(review.lesson_date).toLocaleDateString(
                   "tr-TR",
                   {

@@ -1,10 +1,10 @@
 import StudentDetailPage from "@/containers/StudentDetailPage";
 export const dynamic = "force-dynamic";
 
-const PostsPage = ({ params }: any) => {
+const PostsPage = ({ params, searchParams }: any) => {
   return (
     <>
-      <StudentDetailPage params={params} />
+      <StudentDetailPage params={params} searchParams={searchParams} />
     </>
   );
 };

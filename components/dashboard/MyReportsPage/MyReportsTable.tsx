@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import TableRowComponent from "./TableRowComponent";
 
-const StudentTable = ({ data, teacher }: any) => {
+const StudentTable = ({ data, teacher, role }: any) => {
   return (
     <div className="mt-10">
       <div className="pb-4 mb-8">
@@ -30,11 +30,15 @@ const StudentTable = ({ data, teacher }: any) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data
-            .filter((item: any) => item.teacher[0]._id === teacher)
-            .map((report: any) => {
-              return <TableRowComponent key={report._id} report={report} />;
-            })}
+          {role === "admin"
+            ? data.map((report: any) => {
+                return <TableRowComponent key={report._id} report={report} />;
+              })
+            : data
+                .filter((item: any) => item.teacher[0]._id === teacher)
+                .map((report: any) => {
+                  return <TableRowComponent key={report._id} report={report} />;
+                })}
         </TableBody>
       </Table>
     </div>

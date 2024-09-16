@@ -21,6 +21,7 @@ import vocabularyComment from "@/lib/vocabularyComment";
 import commComment from "@/lib/communicationComment";
 import pronunciationComment from "@/lib/pronunciationComment";
 import fluencyComment from "@/lib/fluencyComment";
+import BackButton from "@/components/BackButton";
 
 const StepThree = ({
   prev,
@@ -35,7 +36,10 @@ const StepThree = ({
 }: any) => {
   if (!reviews || reviews.length === 0) {
     return (
-      <div>Talep etmiş olduğunuz aya ait bir değerlendirme bulunmamaktadır</div>
+      <div className="flex flex-col items-center">
+        <h4 className="mb-8">No review found for the selected time period</h4>
+        <BackButton link="/dashboard" text="Create Report" />
+      </div>
     );
   } else {
     const { toast } = useToast();
@@ -161,9 +165,10 @@ const StepThree = ({
           const html2pdf = await require("html2pdf.js");
           var element = document.getElementById("report");
           html2pdf(element, {
-            margin: 10,
+            margin: [20, 10, 0, 10],
             filename: "stapp_report",
             image: { type: "jpeg", quality: 1 },
+            pagebreak: { mode: "avoid-all", before: "#page2el" },
             html2canvas: { scale: 2 },
           });
           setTimeout(() => {
@@ -180,10 +185,10 @@ const StepThree = ({
     return (
       <div className="w-full" id="report">
         <div className="flex items-end justify-between scroll-m-20 text-sm text-muted-foreground tracking-tight border-b-3 pb-4 border-b-gray-400">
-          <h1 className="text-4xl">
-            AYLIK ÖĞRENCİ <br></br>
-            <span>RAPORU</span>
-          </h1>
+          <div className="text-4xl">
+            <p className="mb-1">AYLIK ÖĞRENCİ </p>
+            <p>RAPORU </p>
+          </div>
           <Image src={logo} width={150} alt="TCI Logo" className="mr-4" />
         </div>
         <div className="flex justify-between mt-4 text-gray-700">
@@ -295,7 +300,10 @@ const StepThree = ({
             </TableBody>
           </Table>
         </div>
-        <div className="mt-8">
+        <div className="mt-8" id="#page2el">
+          <div className="text-2xl text-muted-foreground">
+            <p className="mb-1">DERS DURUM TABLOSU </p>
+          </div>
           <Table>
             <TableCaption>A list of your recent invoices.</TableCaption>
             <TableHeader>
@@ -325,16 +333,6 @@ const StepThree = ({
                         ? average(review.criterias)
                         : "Katılmadı"}
                     </TableCell>
-
-                    {/* <TableCell className="font-medium flex justify-center">
-                      {review.isAttended ? (
-                        <Link href={`/dashboard/reviews/${review._id}`}>
-                          <ListCollapse size={16} />
-                        </Link>
-                      ) : (
-                        " "
-                      )}
-                    </TableCell> */}
                   </TableRow>
                 );
               })}

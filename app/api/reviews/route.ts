@@ -18,12 +18,25 @@ export async function POST(request: Request) {
 export async function GET(request: NextRequest) {
   await dbConnect();
   const query = request.nextUrl.searchParams.get("query");
-  let reviews;
-  if (query) {
-    reviews = await Review.find({ student: query }).sort("-lesson_date");
-  } else {
-    reviews = await Review.find({}).sort("-lesson_date");
-  }
+  const page = request.nextUrl.searchParams.get("page");
 
-  return NextResponse.json({ success: true, data: reviews }, { status: 200 });
+  let data1;
+  let data2;
+  let dataResponses;
+  if (query) {
+    data1 = Review.find({ student: query })
+      .sort("-lesson_date")
+      .limit(5)
+      .skip(5 * (Number(page) - 1));
+    data2 = Review.find({ student: query }).sort("-lesson_date");
+  } else {
+    data1 = Review.find({}).sort("-lesson_date");
+    data2 = Review.find({}).sort("-lesson_date");
+  }
+  const [reviews, totalReviews]: any = await Promise.all([data1, data2]);
+
+  return NextResponse.json(
+    { success: true, data: reviews, length: totalReviews.length },
+    { status: 200 }
+  );
 }

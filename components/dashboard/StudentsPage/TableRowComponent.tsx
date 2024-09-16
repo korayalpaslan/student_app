@@ -8,6 +8,7 @@ const TableRowComponent = ({ student, reviews }: any) => {
       array.reduce((a: any, b: any) => a + b, 0) / array.length;
 
     const studentReviews = reviews
+      .filter((item: any) => item.level === student.level)
       .filter((item: any) => item.student[0]._id === student._id)
       .filter((item: any) => item.isAttended === true);
 

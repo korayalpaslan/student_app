@@ -1,9 +1,10 @@
 "use client";
 import ModalContext from "@/context/ModalContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 export function ChangeRoleModal({ id }: any) {
+  const [isLoading, setIsLoading] = useState(false);
   const ctx = useContext(ModalContext);
 
   const closeModal = () => {
@@ -11,6 +12,7 @@ export function ChangeRoleModal({ id }: any) {
   };
 
   const changeTeacherRoleHandler = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(`${process.env.API_URL}/api/teachers/${id}`, {
         method: "PATCH",
@@ -22,6 +24,8 @@ export function ChangeRoleModal({ id }: any) {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -30,11 +34,10 @@ export function ChangeRoleModal({ id }: any) {
         <div className="flex justify-between items-start p-4">
           <div>
             <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-              Approve Teacher Access
+              Approve or Cancel Teacher Access
             </h4>
-            <p className="text-sm text-muted-foreground w-full md:w-3/4">
-              You will approve teacher access to stapp with her/his own
-              password.
+            <p className="text-sm text-muted-foreground w-full">
+              You are going to switch the access of the teacher.
             </p>
           </div>
           <div>
@@ -55,7 +58,7 @@ export function ChangeRoleModal({ id }: any) {
             className="w-24"
             onClick={changeTeacherRoleHandler}
           >
-            Accept
+            {isLoading ? <p>Please Wait</p> : <p>Change</p>}
           </Button>
         </div>
       </div>

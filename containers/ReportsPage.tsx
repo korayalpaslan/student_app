@@ -31,7 +31,11 @@ const ReportsPage = async () => {
     <div>
       <BackButton text="Overview" link="/dashboard" />
       <Suspense fallback={<Loading />}>
-        <MyReportsTable data={reports.data} teacher={session.user.id} />
+        <MyReportsTable
+          data={reports.data}
+          teacher={session.user.id}
+          role={session.user.role}
+        />
       </Suspense>
     </div>
   );

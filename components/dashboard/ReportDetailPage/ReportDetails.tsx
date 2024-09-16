@@ -67,9 +67,10 @@ const ReportDetails = ({ report }: any) => {
     const html2pdf = await require("html2pdf.js");
     var element = document.getElementById("report");
     html2pdf(element, {
-      margin: 10,
+      margin: [20, 10, 0, 10],
       filename: "stapp_report",
       image: { type: "jpeg", quality: 1 },
+      pagebreak: { mode: "avoid-all", before: "#page2el" },
       html2canvas: { scale: 2 },
     });
   };
@@ -77,10 +78,10 @@ const ReportDetails = ({ report }: any) => {
   return (
     <div className="w-full" id="report">
       <div className="flex items-end justify-between scroll-m-20 text-sm text-muted-foreground tracking-tight border-b-3 pb-4 border-b-gray-400">
-        <h1 className="text-4xl">
-          AYLIK ÖĞRENCİ <br></br>
-          <span>RAPORU</span>
-        </h1>
+        <div className="text-4xl">
+          <p className="mb-1">AYLIK ÖĞRENCİ </p>
+          <p>RAPORU </p>
+        </div>
         <Image src={logo} width={150} alt="TCI Logo" className="mr-4" />
       </div>
       <div className="flex justify-between mt-4 text-gray-700">
@@ -191,7 +192,10 @@ const ReportDetails = ({ report }: any) => {
           </TableBody>
         </Table>
       </div>
-      <div className="mt-8">
+      <div className="mt-8" id="#page2el">
+        <div className="text-2xl text-muted-foreground">
+          <p className="mb-1">DERS DURUM TABLOSU </p>
+        </div>
         <Table>
           <TableCaption>A list of your recent invoices.</TableCaption>
           <TableHeader>
@@ -203,7 +207,7 @@ const ReportDetails = ({ report }: any) => {
           <TableBody>
             {report.lessonAverage.map((lesson: any) => {
               const date = new Date(lesson.lesson_date).toLocaleDateString(
-                "en-GB",
+                "tr-TR",
                 {
                   year: "numeric",
                   month: "long",

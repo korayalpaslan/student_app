@@ -18,10 +18,10 @@ const getStudent = async (id: string) => {
     console.log("Error loading events", error);
   }
 };
-const getReviews = async (query: string) => {
+const getReviews = async (query: string, page: number) => {
   try {
     const res = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/reviews?query=${query}`,
+      `${process.env.NEXTAUTH_URL}/api/reviews?query=${query}&page=${page}`,
       {
         method: "GET",
         headers: headers(),
@@ -35,9 +35,10 @@ const getReviews = async (query: string) => {
   }
 };
 
-const StudentDetailPage = async ({ params }: any) => {
+const StudentDetailPage = async ({ params, searchParams }: any) => {
+  const page = Number(searchParams?.page) || 1;
   const data1 = getStudent(params.id);
-  const data2 = getReviews(params.id);
+  const data2 = getReviews(params.id, page);
   const [student, reviews]: any = await Promise.all([data1, data2]);
 
   return (
@@ -56,7 +57,11 @@ const StudentDetailPage = async ({ params }: any) => {
       </div>
       <Suspense fallback={<Loading />}>
         <Analytics data={reviews.data} />
-        <PerformanceListTable data={reviews.data} />
+        <PerformanceListTable
+          data={reviews.data}
+          totalLength={reviews.length}
+          pageNumber={page}
+        />
       </Suspense>
     </div>
   );

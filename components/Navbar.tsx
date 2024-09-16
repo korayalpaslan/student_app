@@ -51,7 +51,12 @@ const Navbar = ({ username }: UsernameProps) => {
             <Link href="/dashboard/profile">Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <a onClick={() => signOut({ callbackUrl: "/" })}>Logout</a>
+            <a
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="cursor-pointer"
+            >
+              Logout
+            </a>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -72,9 +72,9 @@ const LoginForm = () => {
       if (res.ok) {
         toast({
           variant: "success",
-          title: "Tebrikler",
+          title: "Congratulations",
           description:
-            "Kaydınız başarılı ile oluşturuldu. En kısa sürede giriş onayı mail adresinize gönderilecektir.",
+            "You have successfully registered! You will recieve a confirmation email very soon.",
         });
         form.reset({
           name: "",
@@ -167,7 +167,7 @@ const LoginForm = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Şifre</FormLabel>
+                        <FormLabel>Password</FormLabel>
                         <FormControl>
                           <Input placeholder="Create a password" {...field} />
                         </FormControl>

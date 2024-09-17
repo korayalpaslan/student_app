@@ -148,15 +148,10 @@ const LoginForm = () => {
                 Sign up
               </Link>
             </div>
-            {/*
-            <div className="mt-4 text-center text-sm">
-              <Link href="#" className="underline">
-                Şifremi Unuttum
-              </Link>
-            </div> */}
             {error && (
               <div className="mt-4 text-center text-sm text-red-600">
-                Hatalı veya E-posta girişi. Tekrar deneyin.
+                Your e-mail or password was incorrect. Please try again or
+                sign-up if your do not have an account.
               </div>
             )}
           </CardContent>

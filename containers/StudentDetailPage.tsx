@@ -41,9 +41,9 @@ const StudentDetailPage = async ({ params, searchParams }: any) => {
   const data2 = getReviews(params.id, page);
   const [student, reviews]: any = await Promise.all([data1, data2]);
 
-  const totalLength = reviews.allData.map(
-    (item: any) => item.level === item.student[0].level
-  ).length;
+  const totalLength = reviews.allData
+    .filter((item: any) => item.student[0]._id === student.data._id)
+    .map((item: any) => item.level === item.student[0].level).length;
 
   return (
     <div>
@@ -65,6 +65,7 @@ const StudentDetailPage = async ({ params, searchParams }: any) => {
           data={reviews.data}
           totalLength={totalLength}
           pageNumber={page}
+          studentId={student.data._id}
         />
       </Suspense>
     </div>

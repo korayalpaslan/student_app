@@ -22,7 +22,12 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 const moment = require("moment");
 
-const PerformenceListTable = ({ data, totalLength, pageNumber }: any) => {
+const PerformenceListTable = ({
+  data,
+  totalLength,
+  pageNumber,
+  studentId,
+}: any) => {
   //// PAGINATION
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -108,7 +113,7 @@ const PerformenceListTable = ({ data, totalLength, pageNumber }: any) => {
                 return (
                   <PaginationItem key={index}>
                     <PaginationLink
-                      href={`/dashboard/students/66ca422d03905c8aa8c4ac6b?page=${
+                      href={`/dashboard/students/${studentId}?page=${
                         index + 1
                       }`}
                     >

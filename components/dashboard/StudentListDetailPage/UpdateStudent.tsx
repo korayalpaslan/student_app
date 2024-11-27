@@ -66,6 +66,7 @@ const UpdateStudent = ({ student }: any) => {
   });
 
   const submitHandler = async (data: z.infer<typeof formSchema>) => {
+    const birth = moment(data.birth_date).subtract(1, "day").format();
     setIsLoading(true);
     try {
       const res = await fetch(
@@ -73,7 +74,10 @@ const UpdateStudent = ({ student }: any) => {
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            ...data,
+            birth_date: birth,
+          }),
         }
       );
       if (res.ok) {

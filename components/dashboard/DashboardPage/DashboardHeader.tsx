@@ -2,15 +2,25 @@ import React from "react";
 import DashboardCard from "@/components/dashboard/DashboardPage/DashboardCard";
 import { FolderOpen, BookOpenText, User, Users } from "lucide-react";
 
-const DashboardHeader = ({ student, reports, reviews, teachers }: any) => {
-  const realReviewsNumber = reviews.data.filter(
-    (review: any) => review.isAttended === true
-  ).length;
+const DashboardHeader = ({ students, reports, reviews, teachers }: any) => {
+  const realReviewsNumber = reviews.data
+    .filter((review: any) => review.isAttended === true)
+    .filter((review: any) => {
+      return review.student[0].isActive === true;
+    })
+    .filter((review: any) => {
+      return review.level === review.student[0].level;
+    }).length;
+
+  const activeStudentNumber = students.data.filter((student: any) => {
+    return student.isActive === true;
+  }).length;
+
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-5 mb-5">
       <DashboardCard
         title="Number of Students"
-        count={student || 0}
+        count={activeStudentNumber || 0}
         icon={
           <Users className="text-slate-500 dark:text-slate-200" size={32} />
         }

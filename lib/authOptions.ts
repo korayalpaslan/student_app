@@ -29,7 +29,7 @@ export const authOptions: any = {
   ],
   session: {
     strategy: "jwt",
-    maxAge: 600,
+    maxAge: 3600,
   },
 
   callbacks: {

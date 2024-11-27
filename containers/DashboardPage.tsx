@@ -3,7 +3,8 @@ import { headers } from "next/headers";
 import { Suspense } from "react";
 import Loading from "@/app/dashboard/loading";
 import DashboardHeader from "@/components/dashboard/DashboardPage/DashboardHeader";
-import Analytics from "@/components/dashboard/DashboardPage/Analytics";
+// import Analytics from "@/components/dashboard/DashboardPage/Analytics";
+import OverviewTable from "@/components/dashboard/DashboardPage/OverviewTable";
 
 const getStudents = async () => {
   try {
@@ -76,12 +77,13 @@ const DashboardPage = async () => {
     <>
       <Suspense fallback={<Loading />}>
         <DashboardHeader
-          student={students.data.length}
+          students={students}
           reports={reports.data.length}
           reviews={reviews}
           teachers={teachers.data.length}
         />
-        <Analytics data={reviews.data} />
+        <OverviewTable data={reviews.data} students={students.data} />
+        {/* <Analytics data={reviews.data} /> */}
       </Suspense>
     </>
   );

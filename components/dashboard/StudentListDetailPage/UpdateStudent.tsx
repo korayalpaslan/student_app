@@ -54,19 +54,19 @@ const UpdateStudent = ({ student }: any) => {
   const [error, serError] = useState(false);
   const router = useRouter();
 
-  const birth = moment(student.birth_date).add(1, "day").format();
+  // const birth = moment(student.birth_date).add(1, "day").format();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       fullname: student.fullname,
       class: student.class,
       level: student.level,
-      birth_date: new Date(birth),
+      birth_date: new Date(student.birth_date),
     },
   });
 
   const submitHandler = async (data: z.infer<typeof formSchema>) => {
-    const birth = moment(data.birth_date).subtract(1, "day").format();
+    // const birth = moment(data.birth_date).subtract(1, "day").format();
     setIsLoading(true);
     try {
       const res = await fetch(
@@ -74,7 +74,7 @@ const UpdateStudent = ({ student }: any) => {
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...data, birth_date: birth }),
+          body: JSON.stringify({ ...data }),
         }
       );
       if (res.ok) {

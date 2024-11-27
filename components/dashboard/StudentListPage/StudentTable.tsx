@@ -53,9 +53,13 @@ const StudentTable = ({ data }: PostTableProps) => {
                   {student.level}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  {new Date(
+                  {/* {new Date(
                     moment(student.birth_date).add(1, "day").format()
-                  ).toLocaleDateString("en-EN", options)}
+                  ).toLocaleDateString("en-EN", options)} */}
+                  {new Date(student.birth_date).toLocaleDateString(
+                    "en-EN",
+                    options
+                  )}
                 </TableCell>
                 <TableCell className="text-center font-medium">
                   <Link href={`/dashboard/student_list/${student._id}`}>

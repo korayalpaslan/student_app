@@ -63,7 +63,6 @@ const CreateStudent = () => {
 
   const submitHandler = async (data: z.infer<typeof formSchema>) => {
     const birth = moment(data.birth_date).subtract(1, "day").format();
-
     setIsLoading(true);
     try {
       const res = await fetch(`${process.env.API_URL}/api/students`, {
@@ -71,7 +70,6 @@ const CreateStudent = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
-          birth_date: birth,
         }),
       });
       if (res.ok) {

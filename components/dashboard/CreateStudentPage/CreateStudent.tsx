@@ -62,7 +62,7 @@ const CreateStudent = () => {
   });
 
   const submitHandler = async (data: z.infer<typeof formSchema>) => {
-    const birth = moment(data.birth_date).add(1, "day").format();
+    const birth = moment(data.birth_date).subtract(1, "day").format();
 
     setIsLoading(true);
     try {

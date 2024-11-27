@@ -14,6 +14,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -34,6 +43,9 @@ const formSchema = z.object({
   class: z.string().min(1, {
     message: "Sınıf Girmelisiniz",
   }),
+  birth_date: z.date({
+    required_error: "Doğum Tarihi girmelisiniz.",
+  }),
 });
 
 const UpdateStudent = ({ student }: any) => {
@@ -41,12 +53,15 @@ const UpdateStudent = ({ student }: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, serError] = useState(false);
   const router = useRouter();
+
+  const birth = moment(student.birth_date).add(1, "day").format();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       fullname: student.fullname,
       class: student.class,
       level: student.level,
+      birth_date: new Date(birth),
     },
   });
 
@@ -170,6 +185,48 @@ const UpdateStudent = ({ student }: any) => {
                           <SelectItem value="B2">B2</SelectItem>
                         </SelectContent>
                       </Select>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="grid gap-2">
+                <FormField
+                  control={form.control}
+                  name="birth_date"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col mt-2">
+                      <FormLabel className="mb-1">Date of Birth</FormLabel>
+
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-[240px] pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Tarih seçiniz</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent align="start" className=" w-auto p-0">
+                          <Calendar
+                            mode="single"
+                            captionLayout="dropdown-buttons"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            fromYear={1960}
+                            toYear={2020}
+                          />
+                        </PopoverContent>
+                      </Popover>
 
                       <FormMessage />
                     </FormItem>

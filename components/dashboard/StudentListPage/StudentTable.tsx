@@ -54,7 +54,7 @@ const StudentTable = ({ data }: PostTableProps) => {
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {new Date(
-                    moment(student.birth_date).subtract(1, "day").format()
+                    moment(student.birth_date).add(1, "day").format()
                   ).toLocaleDateString("en-EN", options)}
                 </TableCell>
                 <TableCell className="text-center font-medium">

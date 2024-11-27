@@ -74,10 +74,7 @@ const UpdateStudent = ({ student }: any) => {
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...data,
-            birth_date: birth,
-          }),
+          body: JSON.stringify({ ...data, birth_date: birth }),
         }
       );
       if (res.ok) {

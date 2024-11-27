@@ -12,9 +12,11 @@ const DashboardHeader = ({ students, reports, reviews, teachers }: any) => {
       return review.level === review.student[0].level;
     }).length;
 
-  const activeStudentNumber = students.data.filter((student: any) => {
-    return student.isActive === true;
-  }).length;
+  // const activeStudentNumber = students.data.filter((student: any) => {
+  //   return student.isActive === true;
+  // }).length;
+
+  const activeStudentNumber = students.data.length;
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-5 mb-5">

@@ -18,7 +18,7 @@ export default async function RootLayout({
     <main>
       <ModalContextProvider>
         <ToggleContextProvider>
-          <Navbar username={session.user.name} />
+          {/* <Navbar username={session.user.name} /> */}
           <div className="flex">
             <div className="hidden xl:block mt-[10vh] w-[300px] h-[90vh]">
               <Sidebar />

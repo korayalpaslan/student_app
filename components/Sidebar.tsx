@@ -29,7 +29,7 @@ const Sidebar = () => {
     <Command className="rounded-none min-h-[90vh] fixed top-[10vh] w-[300px] border-r-1">
       <CommandInput placeholder="Search menu tab" />
       <CommandList className="min-h-[90vh]">
-        <CommandEmpty>Sonuç bulunamadı.</CommandEmpty>
+        <CommandEmpty>Sonuç bulunamadı...</CommandEmpty>
         <CommandGroup heading="Essentials">
           <CommandItem>
             <div

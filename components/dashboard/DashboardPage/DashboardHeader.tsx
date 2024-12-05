@@ -3,18 +3,11 @@ import DashboardCard from "@/components/dashboard/DashboardPage/DashboardCard";
 import { FolderOpen, BookOpenText, User, Users } from "lucide-react";
 
 const DashboardHeader = ({ students, reports, reviews, teachers }: any) => {
-  const realReviewsNumber = reviews.data
+  const realReviewsNumber = reviews.allData
     .filter((review: any) => review.isAttended === true)
-    .filter((review: any) => {
-      return review.student[0].isActive === true;
-    })
     .filter((review: any) => {
       return review.level === review.student[0].level;
     }).length;
-
-  // const activeStudentNumber = students.data.filter((student: any) => {
-  //   return student.isActive === true;
-  // }).length;
 
   const activeStudentNumber = students.data.length;
 

@@ -33,8 +33,6 @@ const ReportDetails = ({ report }: any) => {
     day: "numeric",
   };
 
-  console.log(report);
-
   let level;
 
   if (report.level.startsWith("A")) {

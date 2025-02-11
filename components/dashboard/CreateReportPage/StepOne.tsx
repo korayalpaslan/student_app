@@ -31,16 +31,16 @@ import { startOfYesterday } from "date-fns";
 
 const formSchema = z.object({
   student: z.string().min(1, {
-    message: "Öğrenci Adı Girmelisiniz",
+    message: "Please select student name",
   }),
   // month: z.string().min(1, {
   //   message: "Ay Seçimi Yapmalısınız",
   // }),
   start_date: z.date({
-    required_error: "Başlangıç Tarihi girmelisiniz.",
+    required_error: "Please select report start date.",
   }),
   end_date: z.date({
-    required_error: "Bitiş Tarihi girmelisiniz.",
+    required_error: "Please select report end date.",
   }),
 });
 

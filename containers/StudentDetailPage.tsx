@@ -60,7 +60,7 @@ const StudentDetailPage = async ({ params, searchParams }: any) => {
         </p>
       </div>
       <Suspense fallback={<Loading />}>
-        <Analytics data={reviews.data} />
+        <Analytics data={reviews.allData} />
         <PerformanceListTable
           data={reviews.data}
           totalLength={totalLength}

@@ -27,9 +27,9 @@ const OverviewTable = ({ data, students }: PostTableProps) => {
   const levels = ["A1+", "A2", "A2+", "B1", "B1+", "B2"];
 
   const filteredData = data
-    .filter((review: any) => {
-      return review.student[0].isActive === true;
-    })
+    // .filter((review: any) => {
+    //   return review.student[0].isActive === true;
+    // })
     .filter((review: any) => {
       return review.level === review.student[0].level;
     });

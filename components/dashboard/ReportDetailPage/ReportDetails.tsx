@@ -23,6 +23,7 @@ import vocabularyComment from "@/lib/vocabularyComment";
 import commComment from "@/lib/communicationComment";
 import pronunciationComment from "@/lib/pronunciationComment";
 import fluencyComment from "@/lib/fluencyComment";
+import contributionComment from "@/lib/contributionComment";
 
 const ReportDetails = ({ report }: any) => {
   const average = (array: any) =>
@@ -52,9 +53,10 @@ const ReportDetails = ({ report }: any) => {
     level
   );
   const fluencyCommentText: any = fluencyComment(report.performance[4], level);
+  const contibutionText: any = contributionComment(report.performance[5]);
 
   const generalSuccessPerc =
-    (report.performance.reduce((a: number, b: number) => a + b, 0) / 5 / 4) *
+    (report.performance.reduce((a: number, b: number) => a + b, 0) / 6 / 4) *
     100;
 
   const toFixedIfNecessary = (value: any, dp: any) => {
@@ -189,6 +191,10 @@ const ReportDetails = ({ report }: any) => {
                 {fluencyCommentText}
               </TableCell>
             </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">Derse Katılım </TableCell>
+              <TableCell className="font-medium">{contibutionText}</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </div>
@@ -219,7 +225,9 @@ const ReportDetails = ({ report }: any) => {
                 <TableRow key={lesson._id}>
                   <TableCell className="font-medium">{date}</TableCell>
                   <TableCell className="font-medium text-center">
-                    {lesson.isAttended ? lesson.average : "Katılmadı"}
+                    {lesson.isAttended
+                      ? toFixedIfNecessary(lesson.average, 2)
+                      : "Katılmadı"}
                   </TableCell>
                 </TableRow>
               );

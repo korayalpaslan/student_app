@@ -9,6 +9,7 @@ import {
 import TableRowComponent from "./TableRowComponent";
 
 const StudentTable = ({ data, teacher, role }: any) => {
+  console.log(data.lessonAverage);
   return (
     <div className="mt-10">
       <div className="pb-4 mb-8">

@@ -58,6 +58,9 @@ const formSchema = z.object({
   criteria_five: z.enum(["1", "2", "3", "4"], {
     required_error: "You need to select a notification type.",
   }),
+  criteria_six: z.enum(["1", "2", "3", "4"], {
+    required_error: "You need to select a notification type.",
+  }),
   comment: z.string(),
 });
 
@@ -77,6 +80,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
       criteria_three: "1",
       criteria_four: "1",
       criteria_five: "1",
+      criteria_six: "1",
       comment: "",
     },
   });
@@ -100,6 +104,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
             Number(data.criteria_three),
             Number(data.criteria_four),
             Number(data.criteria_five),
+            Number(data.criteria_six),
           ],
           teacher: teacher_id,
           level: studentLevel.level,
@@ -121,6 +126,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
           criteria_three: "1",
           criteria_four: "1",
           criteria_five: "1",
+          criteria_six: "1",
           comment: "",
         });
         setIsLoading(false);
@@ -591,6 +597,72 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                 </FormControl>
                                 <FormLabel className="font-normal">
                                   Generally smooth with occasional hesitations
+                                </FormLabel>
+                              </FormItem>
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="grid gap-4 mb-4 col-span-2 lg:col-span-1">
+                  <div className="grid gap-4">
+                    <FormField
+                      control={form.control}
+                      name="criteria_six"
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <FormLabel>CONTRIBUTES TO LESSON</FormLabel>
+                          <FormControl>
+                            <RadioGroup
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              className="flex flex-col space-y-1"
+                            >
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem
+                                    value="1"
+                                    checked={field.value === "1"}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  Did not contribute
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem
+                                    value="2"
+                                    checked={field.value === "2"}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  Needs to be encouraged
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem
+                                    value="3"
+                                    checked={field.value === "3"}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  Good
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem
+                                    value="4"
+                                    checked={field.value === "4"}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  Very Good
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>

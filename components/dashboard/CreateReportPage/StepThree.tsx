@@ -22,6 +22,7 @@ import commComment from "@/lib/communicationComment";
 import pronunciationComment from "@/lib/pronunciationComment";
 import fluencyComment from "@/lib/fluencyComment";
 import BackButton from "@/components/BackButton";
+import contributionComment from "@/lib/contributionComment";
 
 const StepThree = ({
   prev,
@@ -74,6 +75,7 @@ const StepThree = ({
     const array3 = filteredReviews.map((item: any) => item.criterias[2]);
     const array4 = filteredReviews.map((item: any) => item.criterias[3]);
     const array5 = filteredReviews.map((item: any) => item.criterias[4]);
+    const array6 = filteredReviews.map((item: any) => item.criterias[5]);
     const grammarAvg =
       array1.reduce((a: number, b: number) => a + b, 0) / array1.length;
     const vocabularyAvg =
@@ -84,6 +86,8 @@ const StepThree = ({
       array4.reduce((a: number, b: number) => a + b, 0) / array4.length;
     const fluencyAvg =
       array5.reduce((a: number, b: number) => a + b, 0) / array5.length;
+    const contributionAvg =
+      array6.reduce((a: number, b: number) => a + b, 0) / array6.length;
 
     const grammarCommentText: any = grammarComment(grammarAvg, level);
     const vocabularyCommentText: any = vocabularyComment(vocabularyAvg, level);
@@ -93,6 +97,7 @@ const StepThree = ({
       level
     );
     const fluencyCommentText: any = fluencyComment(fluencyAvg, level);
+    const contibutionCommentText: any = contributionComment(contributionAvg);
 
     const generalSuccessPerc =
       ([
@@ -101,8 +106,9 @@ const StepThree = ({
         commAvg,
         pronunciationAvg,
         fluencyAvg,
+        contributionAvg,
       ].reduce((a: number, b: number) => a + b, 0) /
-        5 /
+        6 /
         4) *
       100;
 
@@ -131,6 +137,7 @@ const StepThree = ({
           commAvg,
           pronunciationAvg,
           fluencyAvg,
+          contributionAvg,
         ],
         report_date: moment(today).add(3, "hour"),
         report_start_date: moment(startDate).add(3, "hour"),
@@ -180,6 +187,10 @@ const StepThree = ({
       } finally {
         setIsLoading(false);
       }
+    };
+
+    const toFixedIfNecessary = (value: any, dp: any) => {
+      return +parseFloat(value).toFixed(dp);
     };
 
     return (
@@ -297,6 +308,12 @@ const StepThree = ({
                   {fluencyCommentText}
                 </TableCell>
               </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Derse Katılım </TableCell>
+                <TableCell className="font-medium">
+                  {contibutionCommentText}
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </div>
@@ -330,7 +347,7 @@ const StepThree = ({
                     <TableCell className="font-medium">{date}</TableCell>
                     <TableCell className="font-medium text-center">
                       {review.isAttended
-                        ? average(review.criterias)
+                        ? toFixedIfNecessary(average(review.criterias), 2)
                         : "Katılmadı"}
                     </TableCell>
                   </TableRow>

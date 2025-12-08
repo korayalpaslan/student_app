@@ -50,6 +50,10 @@ const PerformenceListTable = ({
   const average = (array: any) =>
     array.reduce((a: any, b: any) => a + b) / array.length;
 
+  const toFixedIfNecessary = (value: any, dp: any) => {
+    return +parseFloat(value).toFixed(dp);
+  };
+
   return (
     <div>
       <div className="mt-10">
@@ -80,7 +84,7 @@ const PerformenceListTable = ({
                     <TableCell className="font-medium">{date}</TableCell>
                     <TableCell className="font-medium text-center">
                       {review.isAttended
-                        ? average(review.criterias)
+                        ? toFixedIfNecessary(average(review.criterias), 2)
                         : "Not Attended"}
                     </TableCell>
                     <TableCell className="font-medium flex justify-center">

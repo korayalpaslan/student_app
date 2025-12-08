@@ -50,6 +50,14 @@ const PerformenceDetailTable = ({ data }: any) => {
                 {data.data.criterias[4]}
               </TableCell>
             </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">
+                Contributes To Lesson
+              </TableCell>
+              <TableCell className="font-medium text-center">
+                {data.data.criterias[5] || "N/A"}
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </div>

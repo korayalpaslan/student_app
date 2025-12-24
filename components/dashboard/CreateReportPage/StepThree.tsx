@@ -112,6 +112,17 @@ const StepThree = ({
         4) *
       100;
 
+    console.log(
+      [
+        grammarAvg,
+        vocabularyAvg,
+        commAvg,
+        pronunciationAvg,
+        fluencyAvg,
+        contributionAvg,
+      ].reduce((a: number, b: number) => a + b, 0)
+    );
+
     const handleSaveAndDownload = async () => {
       const today = new Date();
       const date1 = moment(endDate).format("L");

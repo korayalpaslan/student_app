@@ -16,13 +16,14 @@ import {
 import { Button } from "@/components/ui/button";
 const moment = require("moment");
 import { addDays } from "date-fns";
-import grammarComment from "@/lib/grammarComment";
-import vocabularyComment from "@/lib/vocabularyComment";
-import commComment from "@/lib/communicationComment";
-import pronunciationComment from "@/lib/pronunciationComment";
+import participationComment from "@/lib/participationComment";
 import fluencyComment from "@/lib/fluencyComment";
+import pronunciationComment from "@/lib/pronunciationComment";
+import vocabularyComment from "@/lib/vocabularyComment";
+import listeningComment from "@/lib/listeningComment";
 import BackButton from "@/components/BackButton";
-import contributionComment from "@/lib/contributionComment";
+import { toFixedIfNecessary } from "@/utils/decimalFix";
+// import contributionComment from "@/lib/contributionComment";
 
 const StepThree = ({
   prev,
@@ -59,6 +60,10 @@ const StepThree = ({
       (review: any) => review.level === student[0].level
     );
 
+    const studentallRevies = allReviews.filter(
+      (review: any) => review.level === student[0].level
+    );
+
     let level;
 
     if (student[0].level.startsWith("A")) {
@@ -75,53 +80,42 @@ const StepThree = ({
     const array3 = filteredReviews.map((item: any) => item.criterias[2]);
     const array4 = filteredReviews.map((item: any) => item.criterias[3]);
     const array5 = filteredReviews.map((item: any) => item.criterias[4]);
-    const array6 = filteredReviews.map((item: any) => item.criterias[5]);
-    const grammarAvg =
+    // const array6 = filteredReviews.map((item: any) => item.criterias[5]);
+    const participationAvg =
       array1.reduce((a: number, b: number) => a + b, 0) / array1.length;
-    const vocabularyAvg =
-      array2.reduce((a: number, b: number) => a + b, 0) / array2.length;
-    const commAvg =
-      array3.reduce((a: number, b: number) => a + b, 0) / array3.length;
-    const pronunciationAvg =
-      array4.reduce((a: number, b: number) => a + b, 0) / array4.length;
     const fluencyAvg =
+      array2.reduce((a: number, b: number) => a + b, 0) / array2.length;
+    const pronAvg =
+      array3.reduce((a: number, b: number) => a + b, 0) / array3.length;
+    const vocabularyAvg =
+      array4.reduce((a: number, b: number) => a + b, 0) / array4.length;
+    const listeningAvg =
       array5.reduce((a: number, b: number) => a + b, 0) / array5.length;
-    const contributionAvg =
-      array6.reduce((a: number, b: number) => a + b, 0) / array6.length;
+    // const contributionAvg =
+    //   array6.reduce((a: number, b: number) => a + b, 0) / array6.length;
 
-    const grammarCommentText: any = grammarComment(grammarAvg, level);
-    const vocabularyCommentText: any = vocabularyComment(vocabularyAvg, level);
-    const commCommentText: any = commComment(commAvg, level);
-    const pronunciationCommentText: any = pronunciationComment(
-      pronunciationAvg,
+    const participationAvgCommentText: any = participationComment(
+      participationAvg,
       level
     );
     const fluencyCommentText: any = fluencyComment(fluencyAvg, level);
-    const contibutionCommentText: any = contributionComment(contributionAvg);
+    const pronCommentText: any = pronunciationComment(pronAvg, level);
+    const vocabularyCommentText: any = vocabularyComment(vocabularyAvg, level);
+    const listeningCommentText: any = listeningComment(listeningAvg, level);
+    // const contibutionCommentText: any = contributionComment(contributionAvg);
 
     const generalSuccessPerc =
       ([
-        grammarAvg,
-        vocabularyAvg,
-        commAvg,
-        pronunciationAvg,
+        participationAvg,
         fluencyAvg,
-        contributionAvg,
+        pronAvg,
+        vocabularyAvg,
+        listeningAvg,
+        // contributionAvg,
       ].reduce((a: number, b: number) => a + b, 0) /
-        6 /
+        5 /
         4) *
       100;
-
-    console.log(
-      [
-        grammarAvg,
-        vocabularyAvg,
-        commAvg,
-        pronunciationAvg,
-        fluencyAvg,
-        contributionAvg,
-      ].reduce((a: number, b: number) => a + b, 0)
-    );
 
     const handleSaveAndDownload = async () => {
       const today = new Date();
@@ -143,12 +137,12 @@ const StepThree = ({
         level: student[0].level,
         class: student[0].class,
         performance: [
-          grammarAvg,
-          vocabularyAvg,
-          commAvg,
-          pronunciationAvg,
+          participationAvg,
           fluencyAvg,
-          contributionAvg,
+          pronAvg,
+          vocabularyAvg,
+          listeningAvg,
+          // contributionAvg,
         ],
         report_date: moment(today).add(3, "hour"),
         report_start_date: moment(startDate).add(3, "hour"),
@@ -198,10 +192,6 @@ const StepThree = ({
       } finally {
         setIsLoading(false);
       }
-    };
-
-    const toFixedIfNecessary = (value: any, dp: any) => {
-      return +parseFloat(value).toFixed(dp);
     };
 
     return (
@@ -290,27 +280,11 @@ const StepThree = ({
             </TableHeader>
             <TableBody>
               <TableRow>
-                <TableCell className="font-medium">Dilbilgisi </TableCell>
                 <TableCell className="font-medium">
-                  {grammarCommentText}
+                  Katılım ve Derse İlgi{" "}
                 </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Kelime </TableCell>
                 <TableCell className="font-medium">
-                  {vocabularyCommentText}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">
-                  İnteraktif iletişim
-                </TableCell>
-                <TableCell className="font-medium">{commCommentText}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Telaffuz </TableCell>
-                <TableCell className="font-medium">
-                  {pronunciationCommentText}
+                  {participationAvgCommentText}
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -320,11 +294,31 @@ const StepThree = ({
                 </TableCell>
               </TableRow>
               <TableRow>
+                <TableCell className="font-medium">
+                  Telaffuz ve Anlaşılırlık
+                </TableCell>
+                <TableCell className="font-medium">{pronCommentText}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Kelime Kullanımı </TableCell>
+                <TableCell className="font-medium">
+                  {vocabularyCommentText}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  Dinleme ve Anlama{" "}
+                </TableCell>
+                <TableCell className="font-medium">
+                  {listeningCommentText}
+                </TableCell>
+              </TableRow>
+              {/* <TableRow>
                 <TableCell className="font-medium">Derse Katılım </TableCell>
                 <TableCell className="font-medium">
                   {contibutionCommentText}
                 </TableCell>
-              </TableRow>
+              </TableRow> */}
             </TableBody>
           </Table>
         </div>
@@ -343,7 +337,7 @@ const StepThree = ({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredReviews.map((review: any) => {
+              {studentallRevies.map((review: any) => {
                 const date = new Date(review.lesson_date).toLocaleDateString(
                   "tr-TR",
                   {

@@ -18,12 +18,13 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 const moment = require("moment");
-import grammarComment from "@/lib/grammarComment";
-import vocabularyComment from "@/lib/vocabularyComment";
-import commComment from "@/lib/communicationComment";
-import pronunciationComment from "@/lib/pronunciationComment";
+import participationComment from "@/lib/participationComment";
 import fluencyComment from "@/lib/fluencyComment";
-import contributionComment from "@/lib/contributionComment";
+import pronunciationComment from "@/lib/pronunciationComment";
+import vocabularyComment from "@/lib/vocabularyComment";
+import listeningComment from "@/lib/listeningComment";
+import { toFixedIfNecessary } from "@/utils/decimalFix";
+// import contributionComment from "@/lib/contributionComment";
 
 const ReportDetails = ({ report }: any) => {
   const average = (array: any) =>
@@ -42,26 +43,28 @@ const ReportDetails = ({ report }: any) => {
     level = "B";
   }
 
-  const grammarCommentText: any = grammarComment(report.performance[0], level);
-  const vocabularyCommentText: any = vocabularyComment(
-    report.performance[1],
+  const participationCommentText: any = participationComment(
+    report.performance[0],
     level
   );
-  const commCommentText: any = commComment(report.performance[2], level);
-  const pronunciationCommentText: any = pronunciationComment(
+  const fluencyCommentText: any = fluencyComment(report.performance[1], level);
+  const pronCommentText: any = pronunciationComment(
+    report.performance[2],
+    level
+  );
+  const vocabularyCommentText: any = vocabularyComment(
     report.performance[3],
     level
   );
-  const fluencyCommentText: any = fluencyComment(report.performance[4], level);
-  const contibutionText: any = contributionComment(report.performance[5]);
+  const listeningCommentText: any = listeningComment(
+    report.performance[4],
+    level
+  );
+  // const contibutionText: any = contributionComment(report.performance[5]);
 
   const generalSuccessPerc =
-    (report.performance.reduce((a: number, b: number) => a + b, 0) / 6 / 4) *
+    (report.performance.reduce((a: number, b: number) => a + b, 0) / 5 / 4) *
     100;
-
-  const toFixedIfNecessary = (value: any, dp: any) => {
-    return +parseFloat(value).toFixed(dp);
-  };
 
   const finalDate = moment(report.report_end_date).subtract(1, "day");
 
@@ -164,25 +167,11 @@ const ReportDetails = ({ report }: any) => {
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell className="font-medium">Dilbilgisi </TableCell>
               <TableCell className="font-medium">
-                {grammarCommentText}
+                Katılım ve Derse İlgi{" "}
               </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-medium">Kelime </TableCell>
               <TableCell className="font-medium">
-                {vocabularyCommentText}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-medium">İnteraktif iletişim</TableCell>
-              <TableCell className="font-medium">{commCommentText}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-medium">Telaffuz </TableCell>
-              <TableCell className="font-medium">
-                {pronunciationCommentText}
+                {participationCommentText}
               </TableCell>
             </TableRow>
             <TableRow>
@@ -192,8 +181,22 @@ const ReportDetails = ({ report }: any) => {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Derse Katılım </TableCell>
-              <TableCell className="font-medium">{contibutionText}</TableCell>
+              <TableCell className="font-medium">
+                Telaffuz ve Anlaşılırlık
+              </TableCell>
+              <TableCell className="font-medium">{pronCommentText}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">Kelime Kullanımı </TableCell>
+              <TableCell className="font-medium">
+                {vocabularyCommentText}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">Dinleme ve Anlama </TableCell>
+              <TableCell className="font-medium">
+                {listeningCommentText}
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

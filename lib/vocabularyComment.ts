@@ -3,49 +3,41 @@ const vocabularyComment = (Avg: number, level: string) => {
 
   switch (true) {
     case Avg > 3.49 && level === "A":
-      comment =
-        "Bilinen konulardaki görüşlerini ifade etmek için bir dizi uygun kelime kullanır";
+      comment = "Kelimeleri doğru ve çeşitli şekilde kullanır";
 
       break;
 
     case Avg > 2.49 && level === "A":
-      comment =
-        "Bilinen konulardaki görüşlerini ifade etmek için uygun kelimeler kullanır";
+      comment = "Konuya uygun kelimeler kullanır";
 
       break;
 
     case Avg > 1.49 && level === "A":
-      comment =
-        "Bilinen konulardaki görüşlerini ifade etmek için sınırlı sayıda uygun kelime ve ifade kullanabilir";
+      comment = "Temel kelimeler kullanır, cevapları genişletmekte zorlanır";
 
       break;
 
     case Avg > 3.49 && level === "B":
-      comment =
-        "Tanıdık konulardaki görüşlerini ifade etmek için çeşitli uygun kelime dağarcığı kullanır";
+      comment = "Kelimeleri doğru ve çeşitli şekilde kullanır";
 
       break;
     case Avg > 2.49 && level === "B":
-      comment =
-        "Tanıdık konulardaki görüşleri iletmek için uygun kelime dağarcığını kullanıreniş bir dilbilgisi yapıları yelpazesini etkili bir şekilde kullanabilir";
+      comment = "Konuya uygun kelimeler kullanır";
 
       break;
 
     case Avg > 1.49 && level === "B":
-      comment =
-        "Tanıdık konular hakkında görüşlerini ifade etmek için uygun kelime ve ifadelerin seçimini yapıp kullanabilir";
+      comment = "Temel kelimeler kullanır, cevapları genişletmekte zorlanır";
 
       break;
 
     case Avg < 1.49 && level === "B":
-      comment =
-        "Tanıdık konuları tartışmak için temel kelime dağarcığını bağımsız olarak kullanabilir";
+      comment = "Çok sınırlı kelime bilgisi kullanır";
 
       break;
 
     default:
-      comment =
-        "Bilinen konularda sadece basit kelimeleri tek başına kullanabilir";
+      comment = "Çok sınırlı kelime bilgisi kullanır";
   }
   return comment;
 };

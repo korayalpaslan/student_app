@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/pagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 const moment = require("moment");
+import { toFixedIfNecessary } from "@/utils/decimalFix";
 
 const PerformenceListTable = ({
   data,
@@ -49,10 +50,6 @@ const PerformenceListTable = ({
   /////
   const average = (array: any) =>
     array.reduce((a: any, b: any) => a + b) / array.length;
-
-  const toFixedIfNecessary = (value: any, dp: any) => {
-    return +parseFloat(value).toFixed(dp);
-  };
 
   return (
     <div>

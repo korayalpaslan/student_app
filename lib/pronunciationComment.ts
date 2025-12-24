@@ -3,42 +3,41 @@ const pronunciationComment = (Avg: number, level: string) => {
 
   switch (true) {
     case Avg > 3.49 && level === "A":
-      Comment = "Telaffuz anlaşılır";
+      Comment = "Konuşması açık, net ve kolay anlaşılırdır";
 
       break;
 
     case Avg > 2.49 && level === "A":
-      Comment = "Fonolojik özelliklerin kontrolü ile çoğunlukla anlaşılırdır";
+      Comment = "Telaffuzu genellikle nettir";
 
       break;
 
     case Avg > 1.49 && level === "A":
-      Comment =
-        "Fonolojik özelliklerin sınırlı kontrolü ile çoğunlukla anlaşılır";
+      Comment = "Bazı kelimeler net değildir ancak genel anlam anlaşılır";
 
       break;
 
     case Avg > 3.49 && level === "B":
-      Comment = "Telaffuzu açık ve anlaşılabilir";
+      Comment = "Konuşması açık, net ve kolay anlaşılırdır";
 
       break;
     case Avg > 2.49 && level === "B":
-      Comment = "Genellikle açık ve telaffuz kontrolü iyidir";
+      Comment = "Telaffuzu genellikle nettir";
 
       break;
 
     case Avg > 1.49 && level === "B":
-      Comment = "Genellikle açık, ama bazı telaffuz zorlukları yaşamaktadır";
+      Comment = "Bazı kelimeler net değildir ancak genel anlam anlaşılır";
 
       break;
 
     case Avg < 1.49 && level === "B":
-      Comment = "Sıklıkla telaffuzunun anlaşılması zordur";
+      Comment = "Konuşması çoğu zaman anlaşılmamaktadır";
 
       break;
 
     default:
-      Comment = "Çoğu zaman anlaşılır değil";
+      Comment = "Konuşması çoğu zaman anlaşılmamaktadır";
   }
   return Comment;
 };

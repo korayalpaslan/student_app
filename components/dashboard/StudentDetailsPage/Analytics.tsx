@@ -15,24 +15,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { toFixedIfNecessary } from "@/utils/decimalFix";
 
 const Analytics = ({ data }: any) => {
-  // const newArray = data.map((item: any) => {
-  //   const itemArray = new Array(
-  //     +item.criteria_one.toFixed(2),
-  //     +item.criteria_two.toFixed(2),
-  //     +item.criteria_three.toFixed(2),
-  //     +item.criteria_four.toFixed(2)
-  //   );
-
-  //   return itemArray;
-  // });
-
-  // const updatedArray = newArray.map((item: any) => {
-  //   const array = item.reduce((a: any, b: any) => a + b) / item.length;
-  //   return array;
-  // });
-
   const arraySum = (arr: any) => {
     const array =
       arr.reduce((a: any, b: any, index: any) => a + b, 0) / arr.length;
@@ -48,7 +33,7 @@ const Analytics = ({ data }: any) => {
           month: "long",
           day: "numeric",
         }),
-        not: arraySum(item.criterias),
+        not: toFixedIfNecessary(arraySum(item.criterias).toFixed(2), 2),
       };
 
       return update;

@@ -58,9 +58,7 @@ const formSchema = z.object({
   criteria_five: z.enum(["1", "2", "3", "4"], {
     required_error: "You need to select a notification type.",
   }),
-  criteria_six: z.enum(["1", "2", "3", "4"], {
-    required_error: "You need to select a notification type.",
-  }),
+
   comment: z.string(),
 });
 
@@ -80,7 +78,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
       criteria_three: "1",
       criteria_four: "1",
       criteria_five: "1",
-      criteria_six: "1",
+
       comment: "",
     },
   });
@@ -104,7 +102,6 @@ const CreateReview = ({ students, teacher_id }: any) => {
             Number(data.criteria_three),
             Number(data.criteria_four),
             Number(data.criteria_five),
-            Number(data.criteria_six),
           ],
           teacher: teacher_id,
           level: studentLevel.level,
@@ -126,7 +123,6 @@ const CreateReview = ({ students, teacher_id }: any) => {
           criteria_three: "1",
           criteria_four: "1",
           criteria_five: "1",
-          criteria_six: "1",
           comment: "",
         });
         setIsLoading(false);
@@ -268,7 +264,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                       name="criteria_one"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>GRAMMAR</FormLabel>
+                          <FormLabel>PARTICIPATION & ENGAGEMENT </FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -283,8 +279,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Numerous errors that greatly hinder
-                                  understanding
+                                  Hardly contributes; avoids speaking
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -295,7 +290,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Frequent errors that impact understanding
+                                  Sometimes contributes when asked
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -306,8 +301,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Several errors that slightly impact
-                                  understanding
+                                  Contributes most of the time
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -318,7 +312,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Mostly accurate with minor errors
+                                  Very active and eager to participate
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -336,7 +330,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                       name="criteria_two"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>VOCABULARY</FormLabel>
+                          <FormLabel>FLUENCY</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -351,8 +345,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Very limited vocabulary; heavy reliance on
-                                  simple words
+                                  Speech is very limited with long pauses
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -363,7 +356,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Limited vocabulary with frequent repetition
+                                  Speaks in short phrases with frequent pauses
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -374,8 +367,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Uses a basic range of vocabulary with some
-                                  repetition
+                                  Speaks in simple sentences with minor pauses
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -386,8 +378,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Good use of varied vocabulary with occasional
-                                  repetition
+                                  Speaks smoothly with confidence
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -405,7 +396,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                       name="criteria_three"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>COMMUNICATION</FormLabel>
+                          <FormLabel>PRONUNCIATION & CLARITY </FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -420,8 +411,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Rarely listens or responds appropriately,
-                                  causing breakdowns in communication
+                                  Speech is often difficult to understand
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -432,8 +422,8 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Frequently misses cues and struggles to
-                                  respond appropriately
+                                  Some words are unclear but meaning is usually
+                                  understood
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -444,8 +434,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Sometimes struggles to respond appropriately
-                                  or misses cues
+                                  Pronunciation is mostly clear
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -456,8 +445,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Usually listens and responds appropriately
-                                  with minor lapses
+                                  Speech is clear and easy to understand
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -475,7 +463,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                       name="criteria_four"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>PRONUNCIATION</FormLabel>
+                          <FormLabel>VOCABULARY USE</FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -490,8 +478,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Pronunciation is unclear and difficult to
-                                  understand
+                                  Uses very limited vocabulary
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -502,8 +489,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Pronunciation is frequently unclear, causing
-                                  confusion
+                                  Uses basic words; struggles to expand answers
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -514,8 +500,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Pronunciation is understandable but with
-                                  noticeable errors
+                                  Uses appropriate vocabulary for the topic
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -526,8 +511,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Generally clear pronunciation with minor
-                                  lapses
+                                  Uses a wide range of words accurately
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -545,7 +529,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                       name="criteria_five"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>FLUENCY</FormLabel>
+                          <FormLabel>LISTENING & COMPREHENSION </FormLabel>
                           <FormControl>
                             <RadioGroup
                               onValueChange={field.onChange}
@@ -560,8 +544,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Speech is halting with frequent pauses, making
-                                  communication difficult
+                                  Has difficulty understanding instructions
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -572,8 +555,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Frequent hesitations and pauses hinder
-                                  communication
+                                  Understands simple instructions with support
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -584,8 +566,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Noticeable pauses or hesitations disrupt the
-                                  flow
+                                  Understands instructions and questions well
                                 </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -596,7 +577,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal">
-                                  Generally smooth with occasional hesitations
+                                  Understands easily and responds appropriately
                                 </FormLabel>
                               </FormItem>
                             </RadioGroup>
@@ -607,7 +588,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                     />
                   </div>
                 </div>
-                <div className="grid gap-4 mb-4 col-span-2 lg:col-span-1">
+                {/* <div className="grid gap-4 mb-4 col-span-2 lg:col-span-1">
                   <div className="grid gap-4">
                     <FormField
                       control={form.control}
@@ -672,7 +653,7 @@ const CreateReview = ({ students, teacher_id }: any) => {
                       )}
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="grid gap-4 mb-4 col-span-2 lg:col-span-1">
                   <div className="grid gap-4">
                     <FormField

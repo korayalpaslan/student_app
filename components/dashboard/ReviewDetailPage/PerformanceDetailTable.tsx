@@ -21,41 +21,39 @@ const PerformenceDetailTable = ({ data }: any) => {
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell className="font-medium">Grammar</TableCell>
+              <TableCell className="font-medium">
+                Participation & Engagement{" "}
+              </TableCell>
               <TableCell className="font-medium text-center">
                 {data.data.criterias[0]}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Vocabulary</TableCell>
+              <TableCell className="font-medium">Fluency </TableCell>
               <TableCell className="font-medium text-center">
                 {data.data.criterias[1]}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Communication</TableCell>
+              <TableCell className="font-medium">
+                Pronunciation & Clarity{" "}
+              </TableCell>
               <TableCell className="font-medium text-center">
                 {data.data.criterias[2]}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Pronunciation</TableCell>
+              <TableCell className="font-medium">Vocabulary Use </TableCell>
               <TableCell className="font-medium text-center">
                 {data.data.criterias[3]}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Fluency</TableCell>
+              <TableCell className="font-medium">
+                Listening & Comprehension{" "}
+              </TableCell>
               <TableCell className="font-medium text-center">
                 {data.data.criterias[4]}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-medium">
-                Contributes To Lesson
-              </TableCell>
-              <TableCell className="font-medium text-center">
-                {data.data.criterias[5] || "N/A"}
               </TableCell>
             </TableRow>
           </TableBody>

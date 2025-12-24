@@ -1,45 +1,45 @@
-const flencyComment = (Avg: number, level: string) => {
-  let Comment;
+const fluencyComment = (Avg: number, level: string) => {
+  let comment;
 
   switch (true) {
     case Avg > 3.49 && level === "A":
-      Comment = "Duraksamadan cevaplar";
+      comment = "Akıcı ve kendinden emin şekilde konuşur";
 
       break;
 
     case Avg > 2.49 && level === "A":
-      Comment = "Bazen duraksayarak cevaplar";
+      comment = "Basit cümlelerle konuşur, küçük duraklamalar olabilir";
 
       break;
 
     case Avg > 1.49 && level === "A":
-      Comment = "Sık sık duraksayarak cevaplar";
+      comment = "Kısa ifadelerle konuşur, sık sık duraklar";
 
       break;
 
     case Avg > 3.49 && level === "B":
-      Comment = "Duraksamadan yanıt verir";
+      comment = "Akıcı ve kendinden emin şekilde konuşur";
 
       break;
     case Avg > 2.49 && level === "B":
-      Comment = "Ara sıra duraklamalarla yanıt verir";
+      comment = "Basit cümlelerle konuşur, küçük duraklamalar olabilir";
 
       break;
 
     case Avg > 1.49 && level === "B":
-      Comment = "Düzenli duraklamalarla yanıt verir";
+      comment = "Kısa ifadelerle konuşur, sık sık duraklar";
 
       break;
 
     case Avg < 1.49 && level === "B":
-      Comment = "Aralıklı duraklamalarla yanıt verir";
+      comment = "Konuşma çok sınırlıdır ve uzun duraklamalar vardır";
 
       break;
 
     default:
-      Comment = "Sürekli duraksamalarla cevaplar";
+      comment = "Konuşma çok sınırlıdır ve uzun duraklamalar vardır";
   }
-  return Comment;
+  return comment;
 };
 
-export default flencyComment;
+export default fluencyComment;

@@ -76,14 +76,15 @@ const DashboardPage = async () => {
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <DashboardHeader
+        {/* <DashboardHeader
           students={students}
           reports={reports.data.length}
           reviews={reviews}
           teachers={teachers.data.length}
-        />
-        <OverviewTable data={reviews.data} students={students.data} />
+        /> */}
+        {/* <OverviewTable data={reviews.data} students={students.data} /> */}
         {/* <Analytics data={reviews.data} /> */}
+        Test
       </Suspense>
     </>
   );

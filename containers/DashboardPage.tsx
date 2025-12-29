@@ -11,7 +11,9 @@ const getStudents = async () => {
       method: "GET",
       cache: "no-store",
     });
-    if (!res.ok) throw new Error("failed to fetch request");
+    if (!res.ok) {
+      throw new Error("Failed to fetch students");
+    }
     return res.json();
   } catch (error) {
     console.log("Error loading events", error);
@@ -24,7 +26,9 @@ const getReviews = async () => {
       method: "GET",
       cache: "no-store",
     });
-    if (!res.ok) throw new Error("failed to fetch request");
+    if (!res.ok) {
+      throw new Error("Failed to fetch reviews");
+    }
     return res.json();
   } catch (error) {
     console.log("Error loading events", error);
@@ -37,7 +41,9 @@ const getTeachers = async () => {
       method: "GET",
       cache: "no-store",
     });
-    if (!res.ok) throw new Error("failed to fetch request");
+    if (!res.ok) {
+      throw new Error("Failed to fetch teachers");
+    }
     return res.json();
   } catch (error) {
     console.log("Error loading events", error);
@@ -49,7 +55,9 @@ const getReports = async () => {
       method: "GET",
       cache: "no-store",
     });
-    if (!res.ok) throw new Error("failed to fetch request");
+    if (!res.ok) {
+      throw new Error("Failed to fetch reports");
+    }
     return res.json();
   } catch (error) {
     console.log("Error loading events", error);

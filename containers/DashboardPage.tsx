@@ -1,5 +1,4 @@
 import React from "react";
-import { headers } from "next/headers";
 import { Suspense } from "react";
 import Loading from "@/app/dashboard/loading";
 import DashboardHeader from "@/components/dashboard/DashboardPage/DashboardHeader";
@@ -8,7 +7,7 @@ import OverviewTable from "@/components/dashboard/DashboardPage/OverviewTable";
 
 const getStudents = async () => {
   try {
-    const res = await fetch(`/api/students`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/students`, {
       method: "GET",
       cache: "no-store",
     });
@@ -21,7 +20,7 @@ const getStudents = async () => {
 
 const getReviews = async () => {
   try {
-    const res = await fetch(`/api/reviews`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reviews`, {
       method: "GET",
       cache: "no-store",
     });
@@ -34,7 +33,7 @@ const getReviews = async () => {
 
 const getTeachers = async () => {
   try {
-    const res = await fetch(`/api/teachers`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/teachers`, {
       method: "GET",
       cache: "no-store",
     });
@@ -46,7 +45,7 @@ const getTeachers = async () => {
 };
 const getReports = async () => {
   try {
-    const res = await fetch(`/api/reports`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reports`, {
       method: "GET",
       cache: "no-store",
     });

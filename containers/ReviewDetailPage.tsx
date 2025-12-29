@@ -2,21 +2,19 @@ import { Suspense } from "react";
 import BackButton from "@/components/BackButton";
 import Loading from "@/app/dashboard/reviews/[id]/loading";
 import PerformenceDetailTable from "@/components/dashboard/ReviewDetailPage/PerformanceDetailTable";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 export const dynamic = "force-dynamic";
 
 const getReview = async (id: string) => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reviews/${id}`, {
-      method: "GET",
-      headers: headers(),
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
+  const res = await fetch(`${process.env.API_URL}/api/reviews/${id}`, {
+    method: "GET",
+    headers: {
+      cookie: cookies().toString(),
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("failed to fetch request");
+  return res.json();
 };
 
 const ReviewDetailPage = async ({ params }: any) => {

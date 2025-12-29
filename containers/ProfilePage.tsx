@@ -1,23 +1,21 @@
 import { Suspense } from "react";
 import BackButton from "@/components/BackButton";
 import Loading from "@/app/loading";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import TeacherProfile from "@/components/dashboard/ProfilePage/TeacherProfile";
 
 const getTeachers = async () => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/teachers`, {
-      method: "GET",
-      headers: headers(),
-      cache: "force-cache",
-    });
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
+  const res = await fetch(`${process.env.API_URL}/api/teachers`, {
+    method: "GET",
+    headers: {
+      cookie: cookies().toString(),
+    },
+    cache: "force-cache",
+  });
+  if (!res.ok) throw new Error("failed to fetch request");
+  return res.json();
 };
 
 const ProfilePage = async () => {

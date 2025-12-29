@@ -2,21 +2,19 @@ import React from "react";
 import { Suspense } from "react";
 import BackButton from "@/components/BackButton";
 import Loading from "@/app/dashboard/my_reports/[id]/loading";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import ReportDetails from "@/components/dashboard/ReportDetailPage/ReportDetails";
 
 const getReport = async (id: string) => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/reports/${id}`, {
-      method: "GET",
-      headers: headers(),
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
+  const res = await fetch(`${process.env.API_URL}/api/reports/${id}`, {
+    method: "GET",
+    headers: {
+      cookie: cookies().toString(),
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("failed to fetch request");
+  return res.json();
 };
 
 const ReportDetailPage = async ({ params }: any) => {

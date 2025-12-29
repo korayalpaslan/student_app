@@ -54,7 +54,7 @@ const UpdateStudent = ({ student }: any) => {
   const [error, serError] = useState(false);
   const router = useRouter();
 
-  // const birth = moment(student.birth_date).add(1, "day").format();
+  const birth = moment(student.birth_date).add(1, "day").format();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

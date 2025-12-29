@@ -3,36 +3,32 @@ import BackButton from "@/components/BackButton";
 import PerformanceListTable from "@/components/dashboard/StudentDetailsPage/PerformanceListTable";
 import Analytics from "@/components/dashboard/StudentDetailsPage/Analytics";
 import Loading from "@/app/dashboard/students/[id]/loading";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 
 const getStudent = async (id: string) => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/students/${id}`, {
-      method: "GET",
-      headers: headers(),
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
+  const res = await fetch(`${process.env.API_URL}/api/students/${id}`, {
+    method: "GET",
+    headers: {
+      cookie: cookies().toString(),
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("failed to fetch request");
+  return res.json();
 };
 const getReviews = async (query: string, page: number) => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/reviews?query=${query}&page=${page}`,
-      {
-        method: "GET",
-        headers: headers(),
-        cache: "no-store",
-      }
-    );
-    if (!res.ok) throw new Error("failed to fetch request");
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
-  }
+  const res = await fetch(
+    `${process.env.API_URL}/api/reviews?query=${query}&page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        cookie: cookies().toString(),
+      },
+      cache: "no-store",
+    }
+  );
+  if (!res.ok) throw new Error("failed to fetch request");
+  return res.json();
 };
 
 const StudentDetailPage = async ({ params, searchParams }: any) => {

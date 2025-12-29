@@ -1,67 +1,65 @@
 import React from "react";
 import { Suspense } from "react";
+import { cookies } from "next/headers";
 import Loading from "@/app/dashboard/loading";
 import DashboardHeader from "@/components/dashboard/DashboardPage/DashboardHeader";
 // import Analytics from "@/components/dashboard/DashboardPage/Analytics";
 import OverviewTable from "@/components/dashboard/DashboardPage/OverviewTable";
 
 const getStudents = async () => {
-  try {
-    const res = await fetch(`https://stapp-tau.vercel.app/api/students`, {
-      method: "GET",
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch students");
-    }
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
+  const res = await fetch(`https://stapp-tau.vercel.app/api/students`, {
+    method: "GET",
+    headers: {
+      cookie: cookies().toString(),
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch students");
   }
+  return res.json();
 };
 
 const getReviews = async () => {
-  try {
-    const res = await fetch(`https://stapp-tau.vercel.app/api/reviews`, {
-      method: "GET",
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch reviews");
-    }
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
+  const res = await fetch(`https://stapp-tau.vercel.app/api/reviews`, {
+    method: "GET",
+    headers: {
+      cookie: cookies().toString(),
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch reviews");
   }
+
+  return res.json();
 };
 
 const getTeachers = async () => {
-  try {
-    const res = await fetch(`https://stapp-tau.vercel.app/api/teachers`, {
-      method: "GET",
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch teachers");
-    }
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
+  const res = await fetch(`https://stapp-tau.vercel.app/api/teachers`, {
+    method: "GET",
+    headers: {
+      cookie: cookies().toString(),
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch teachers");
   }
+  return res.json();
 };
 const getReports = async () => {
-  try {
-    const res = await fetch(`https://stapp-tau.vercel.app/api/reports`, {
-      method: "GET",
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch reports");
-    }
-    return res.json();
-  } catch (error) {
-    console.log("Error loading events", error);
+  const res = await fetch(`https://stapp-tau.vercel.app/api/reports`, {
+    method: "GET",
+    headers: {
+      cookie: cookies().toString(),
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch reports");
   }
+  return res.json();
 };
 
 const DashboardPage = async () => {

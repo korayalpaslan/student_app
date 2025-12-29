@@ -7,7 +7,7 @@ import DashboardHeader from "@/components/dashboard/DashboardPage/DashboardHeade
 import OverviewTable from "@/components/dashboard/DashboardPage/OverviewTable";
 
 const getStudents = async () => {
-  const res = await fetch(`https://stapp-tau.vercel.app/api/students`, {
+  const res = await fetch(`${process.env.API_URL}/api/students`, {
     method: "GET",
     headers: {
       cookie: cookies().toString(),
@@ -21,7 +21,7 @@ const getStudents = async () => {
 };
 
 const getReviews = async () => {
-  const res = await fetch(`https://stapp-tau.vercel.app/api/reviews`, {
+  const res = await fetch(`${process.env.API_URL}/api/reviews`, {
     method: "GET",
     headers: {
       cookie: cookies().toString(),
@@ -36,7 +36,7 @@ const getReviews = async () => {
 };
 
 const getTeachers = async () => {
-  const res = await fetch(`https://stapp-tau.vercel.app/api/teachers`, {
+  const res = await fetch(`${process.env.API_URL}/api/teachers`, {
     method: "GET",
     headers: {
       cookie: cookies().toString(),
@@ -49,7 +49,7 @@ const getTeachers = async () => {
   return res.json();
 };
 const getReports = async () => {
-  const res = await fetch(`https://stapp-tau.vercel.app/api/reports`, {
+  const res = await fetch(`${process.env.API_URL}/api/reports`, {
     method: "GET",
     headers: {
       cookie: cookies().toString(),
